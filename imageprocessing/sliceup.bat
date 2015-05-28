@@ -22,9 +22,9 @@ mkdir -p "$tilesfolder/$basename/125"
 mkdir -p "$samplesfolder"
 
 echo "create half-sized versions for tiling will be discarded later"
-$imagemagick $filename -resize 50%  $basename-500.$extension
-$imagemagick $filename -resize 25%  $basename-250.$extension
-$imagemagick $filename -resize 12.5%  $basename-125.$extension
+echo $imagemagick $filename -resize 50%  $basename-500.$extension
+echo $imagemagick $filename -resize 25%  $basename-250.$extension
+echo $imagemagick $filename -resize 12.5%  $basename-125.$extension
 
 echo create sample
 $imagemagick $filename -thumbnail $samplesizex$samplesize  ./$samplesfolder/$filename
@@ -38,9 +38,7 @@ $imagemagick $basename-125.$extension -crop 256x256 -set filename:tile "%[fx:pag
 
 
 echo cleanup
-rm $basename-500.$extension
-rm $basename-250.$extension
-rm $basename-125.$extension
+
 
 
 

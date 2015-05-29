@@ -21,11 +21,11 @@ public class MainActivity extends ActionBarActivity {
         //2000 × 2829 pixels
         // Set the minimum parameters
         tileView.setSize(5657, 4000);
-        tileView.addDetailLevel(1f, "groundfloor/1000_%col%_%row%.jpg", "groundfloor/groundfloor.jpg");
+        tileView.addDetailLevel(1f, "tiles/groundfloor/1000/_%col%_%row%.jpg", "tiles/samples/groundfloor.jpg", 256, 256);
 
-        tileView.addDetailLevel(0.5f, "groundfloor/500_%col%_%row%.jpg", "groundfloor/groundfloor.jpg");
-        tileView.addDetailLevel(0.25f, "groundfloor/250_%col%_%row%.jpg", "groundfloor/groundfloor.jpg");
-        tileView.addDetailLevel(0.125f, "groundfloor/125_%col%_%row%.jpg", "groundfloor/groundfloor.jpg");
+        tileView.addDetailLevel(0.5f, "tiles/groundfloor/500/_%col%_%row%.jpg", "tiles/sample/groundfloor.jpg", 256, 256);
+        tileView.addDetailLevel(0.25f, "tiles/groundfloor/250/_%col%_%row%.jpg", "tiles/samples/groundfloor.jpg", 256, 256);
+        tileView.addDetailLevel(0.125f, "tiles/groundfloor/125/_%col%_%row%.jpg", "tiles/samples/groundfloor.jpg", 256, 256);
         // bottom left of university 55.942584, -3.188343
         Utils.LatLon latLonM = utils.latLonToMeters(55.942584, -3.188343);
         Utils.LatLon latLonImagePixels = utils.latLonToImagePixels(latLonM.getLat(), latLonM.getLon());
@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         tileView.setCacheEnabled(true);
         tileView.moveToAndCenter(latLonImagePixels.getLon(), latLonImagePixels.getLat());
         setContentView(tileView);
+        tileView.
 
 
         //setContentView(R.layout.activity_main);

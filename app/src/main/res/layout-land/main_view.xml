@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <fragment class="fplan.edina.ac.uk.fplan.PlacesFragment"
+        android:id="@+id/titles"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/places_row_layout" />
+
+    <!-- FrameLayouts are used to block out a part of the screen to display normally a single
+    object
+    detailsElementBackground is a background that can provide details about the data
+    the user is selecting -->
+    <FrameLayout android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/detailsElementBackground"
+        android:layout_weight="3"/>
+
+</LinearLayout>

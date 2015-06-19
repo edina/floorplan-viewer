@@ -46,7 +46,7 @@ public class UtilsTest extends TestCase {
         System.out.println("yPixel " + latLon.getLat());
         System.out.println("xPixel " + latLon.getLon());
 
-        assertEquals("x pixels in image ",  5073.129808, latLon.getLon(), DELTA);
-        assertEquals("y pixels in image ",3745.075892, latLon.getLat(), DELTA);
+        assertEquals("x pixels in image ", 5073.129808, latLon.getLon(), DELTA);
+        assertEquals("y pixels in image ", 3745.075892, latLon.getLat(), DELTA);
     }
 }

@@ -1,52 +1,57 @@
 package fplan.edina.ac.uk.fplan;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.qozix.tileview.TileView;
 
+import fplan.edina.ac.uk.fplan.PlacesFragment.SingleRow;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends Fragment {
     private TileView tileView;
     private Utils utils = new Utils();
+
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Create our TileView
-        tileView = new TileView(this);
+        tileView = new TileView(this.getActivity());
         //2000 × 2829 pixels
         // Set the minimum parameters
-        tileView.setSize(5657, 4000);
-        tileView.addDetailLevel(1f, "tiles/groundfloor/1000/_%col%_%row%.jpg", "tiles/samples/groundfloor.jpg", 256, 256);
+        int zoomF = 2;
+        tileView.setSize(5657*zoomF, 4000*zoomF);
+        tileView.addDetailLevel(1f /zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg");
 
-        tileView.addDetailLevel(0.5f, "tiles/groundfloor/500/_%col%_%row%.jpg", "tiles/sample/groundfloor.jpg", 256, 256);
-        tileView.addDetailLevel(0.25f, "tiles/groundfloor/250/_%col%_%row%.jpg", "tiles/samples/groundfloor.jpg", 256, 256);
-        tileView.addDetailLevel(0.125f, "tiles/groundfloor/125/_%col%_%row%.jpg", "tiles/samples/groundfloor.jpg", 256, 256);
+        tileView.addDetailLevel(0.5f /zoomF, "tiles/groundfloor/500/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg", 256, 256);
+
         // bottom left of university 55.942584, -3.188343
         Utils.LatLon latLonM = utils.latLonToMeters(55.942584, -3.188343);
+
         Utils.LatLon latLonImagePixels = utils.latLonToImagePixels(latLonM.getLat(), latLonM.getLon());
         Log.d( this.tileView.getClass().getName(), "lon " + latLonImagePixels.getLon());
         Log.d( this.tileView.getClass().getName(), "lat " + latLonImagePixels.getLat());
         // Add the view to display it
         tileView.setCacheEnabled(true);
-        tileView.moveToAndCenter(latLonImagePixels.getLon(), latLonImagePixels.getLat());
-        setContentView(tileView);
-        tileView.
+        tileView.setTransitionsEnabled(false);
+
+        //tileView.moveToAndCenter(latLonImagePixels.getLon()*zoomF, latLonImagePixels.getLat()*zoomF);
+
+        return  tileView;
+
 
 
         //setContentView(R.layout.activity_main);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,5 +66,23 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public static MainActivity newInstance(SingleRow row) {
+        if(row == null){
+            throw new NullPointerException("Need a map route row to display");
+        }
+        MainActivity f = new MainActivity();
+        Bundle args = new Bundle();
+        args.putSerializable(PlacesFragment.ROUTE_CHOSEN_KEY, row);
+
+        f.setArguments(args);
+
+        return f;
+    }
+
+    public SingleRow getRow() {
+        return (SingleRow) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
     }
 }

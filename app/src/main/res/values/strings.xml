@@ -3,4 +3,26 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+
+    <string-array name="titles">
+        <item>1 Entrance</item>
+        <item>2 Reception Desk </item>
+        <!--
+        <item>3 The Exhibition Room</item>
+        <item>4 The Library Helpdesk </item>
+        <item>5 Self Issue</item>
+        <item>6 Book Return</item> !-->
+    </string-array>
+
+    <array name="route_list_icons" >
+        <item>@drawable/red_icon</item>
+        <item>@drawable/orange_icon</item>
+    </array>
+
+    <string-array name="descriptions">
+
+        <item>The Main Library was designed by Sir Basil Spence. It was built in 1967.  and A-listed in 2005. Major redevelopment began in 2007, and was completed in Spring 2013.</item>
+        <item>Staffed by both Library Helpdesk and Library Facilities staff. If you are visiting the library, or have lost your University card, this desk will be your first port of call.</item>
+    </string-array>
 </resources>

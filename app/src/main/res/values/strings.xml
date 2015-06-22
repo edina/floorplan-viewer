@@ -19,6 +19,10 @@
         <item>@drawable/red_icon</item>
         <item>@drawable/orange_icon</item>
     </array>
+    <string-array name="locations" >
+        <item>3976,957</item>
+        <item>5120,1056</item>
+    </string-array>
 
     <string-array name="descriptions">
 

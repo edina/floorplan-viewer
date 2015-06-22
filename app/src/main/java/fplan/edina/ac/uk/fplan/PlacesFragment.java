@@ -116,7 +116,7 @@ public class PlacesFragment extends ListFragment {
 
         } else {
 
-            Intent detailIntent = new Intent(this.getActivity(), MainActivity.class);
+            Intent detailIntent = new Intent(this.getActivity(), DetailActivity.class);
 
             detailIntent.putExtra(ROUTE_CHOSEN_KEY, row);
 
@@ -142,14 +142,30 @@ public class PlacesFragment extends ListFragment {
         goToMap(selectedRow);
     }
 
+    static class ImagePixelLocation implements Serializable{
+        private int x;
+        private int y;
 
+        public ImagePixelLocation(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+    }
 
     static class SingleRow implements Serializable {
 
         private String title;
         private int imageId;
         private String description;
-
+        private ImagePixelLocation point;
 
         public int getImageId() {
             return imageId;
@@ -163,12 +179,16 @@ public class PlacesFragment extends ListFragment {
             return description;
         }
 
+        public ImagePixelLocation getPoint(){ return  point;}
 
-        SingleRow(String title, int imageId, String description) {
+        SingleRow(String title, int imageId, String description, String locations) {
             this.title = title;
             this.imageId = imageId;
             this.description = description;
-
+            String[] p = locations.split(",");
+            int x = Integer.valueOf(p[0]);
+            int y = Integer.valueOf(p[1]);
+            point = new ImagePixelLocation(x,y);
         }
 
 
@@ -185,12 +205,12 @@ public class PlacesFragment extends ListFragment {
             String[] titles = resources.getStringArray(R.array.titles);
             String[] descriptions = resources.getStringArray(R.array.descriptions);
 
-
+            String[] locations = resources.getStringArray(R.array.locations);
             TypedArray icons = resources.obtainTypedArray(R.array.route_list_icons);
 
 
             for (int i = 0; i < titles.length; i++) {
-                rows.add(new SingleRow(titles[i], icons.getResourceId(i, -1), descriptions[i]));
+                rows.add(new SingleRow(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i]));
             }
 
         }

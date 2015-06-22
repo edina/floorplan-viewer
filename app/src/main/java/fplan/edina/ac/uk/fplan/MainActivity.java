@@ -21,7 +21,7 @@ public class MainActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        SingleRow routeRow = getRow();
         // Create our TileView
         tileView = new TileView(this.getActivity());
         //2000 × 2829 pixels
@@ -42,7 +42,7 @@ public class MainActivity extends Fragment {
         tileView.setCacheEnabled(true);
         tileView.setTransitionsEnabled(false);
 
-        //tileView.moveToAndCenter(latLonImagePixels.getLon()*zoomF, latLonImagePixels.getLat()*zoomF);
+        tileView.moveToAndCenter(routeRow.getPoint().getX() * zoomF, routeRow.getPoint().getY() * zoomF);
 
         return  tileView;
 

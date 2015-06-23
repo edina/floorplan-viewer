@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment class="fplan.edina.ac.uk.fplan.PlacesFragment"
+    <fragment class="uk.ac.edina.floorplan.PlacesFragment"
         android:id="@+id/titles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

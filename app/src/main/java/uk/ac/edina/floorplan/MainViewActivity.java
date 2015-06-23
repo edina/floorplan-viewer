@@ -1,4 +1,4 @@
-package fplan.edina.ac.uk.fplan;
+package uk.ac.edina.floorplan;
 
 import android.app.Activity;
 import android.os.Bundle;

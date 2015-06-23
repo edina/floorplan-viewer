@@ -1,4 +1,4 @@
-package fplan.edina.ac.uk.fplan;
+package uk.ac.edina.floorplan;
 
 /**
  * Created by murrayking on 22/05/2015.

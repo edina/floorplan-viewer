@@ -16,8 +16,8 @@
     </string-array>
 
     <array name="route_list_icons" >
-        <item>@drawable/red_icon</item>
-        <item>@drawable/orange_icon</item>
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
     </array>
     <string-array name="locations" >
         <item>3976,957</item>

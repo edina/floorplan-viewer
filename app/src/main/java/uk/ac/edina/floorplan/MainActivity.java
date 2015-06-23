@@ -1,4 +1,4 @@
-package fplan.edina.ac.uk.fplan;
+package uk.ac.edina.floorplan;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.qozix.tileview.TileView;
-
-import fplan.edina.ac.uk.fplan.PlacesFragment.SingleRow;
 
 
 public class MainActivity extends Fragment {
@@ -21,12 +20,12 @@ public class MainActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SingleRow routeRow = getRow();
+        PlacesFragment.SingleRow routeRow = getRow();
         // Create our TileView
         tileView = new TileView(this.getActivity());
         //2000 × 2829 pixels
         // Set the minimum parameters
-        int zoomF = 2;
+        int zoomF = 1;
         tileView.setSize(5657*zoomF, 4000*zoomF);
         tileView.addDetailLevel(1f /zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg");
 
@@ -36,13 +35,19 @@ public class MainActivity extends Fragment {
         Utils.LatLon latLonM = utils.latLonToMeters(55.942584, -3.188343);
 
         Utils.LatLon latLonImagePixels = utils.latLonToImagePixels(latLonM.getLat(), latLonM.getLon());
-        Log.d( this.tileView.getClass().getName(), "lon " + latLonImagePixels.getLon());
-        Log.d( this.tileView.getClass().getName(), "lat " + latLonImagePixels.getLat());
+        Log.d(this.tileView.getClass().getName(), "lon " + latLonImagePixels.getLon());
+        Log.d(this.tileView.getClass().getName(), "lat " + latLonImagePixels.getLat());
         // Add the view to display it
         tileView.setCacheEnabled(true);
         tileView.setTransitionsEnabled(false);
+        //tileView.setScale(0.5);
+        int x = routeRow.getPoint().getX();
+        int y = routeRow.getPoint().getY();
+        tileView.slideToAndCenter(x * zoomF, y * zoomF);
 
-        tileView.moveToAndCenter(routeRow.getPoint().getX() * zoomF, routeRow.getPoint().getY() * zoomF);
+        tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
+        Log.d("tag", "x = " + x + "  y = " + y);
+        addPin(x, y);
 
         return  tileView;
 
@@ -50,6 +55,14 @@ public class MainActivity extends Fragment {
 
         //setContentView(R.layout.activity_main);
     }
+
+
+    private void addPin( double x, double y ) {
+        ImageView imageView = new ImageView( this.getActivity() );
+        imageView.setImageResource( R.drawable.push_pin );
+        tileView.addMarker(imageView, x, y );
+    }
+
 
 
 
@@ -69,7 +82,7 @@ public class MainActivity extends Fragment {
     }
 
 
-    public static MainActivity newInstance(SingleRow row) {
+    public static MainActivity newInstance(PlacesFragment.SingleRow row) {
         if(row == null){
             throw new NullPointerException("Need a map route row to display");
         }
@@ -82,7 +95,7 @@ public class MainActivity extends Fragment {
         return f;
     }
 
-    public SingleRow getRow() {
-        return (SingleRow) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
+    public PlacesFragment.SingleRow getRow() {
+        return (PlacesFragment.SingleRow) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
     }
 }

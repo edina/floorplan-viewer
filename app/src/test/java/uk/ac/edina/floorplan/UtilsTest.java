@@ -1,4 +1,4 @@
-package fplan.edina.ac.uk.fplan;
+package uk.ac.edina.floorplan;
 
 import junit.framework.TestCase;
 

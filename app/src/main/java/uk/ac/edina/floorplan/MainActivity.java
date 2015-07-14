@@ -1,7 +1,11 @@
 package uk.ac.edina.floorplan;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,16 +16,42 @@ import android.widget.ImageView;
 
 import com.qozix.tileview.TileView;
 
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconConsumer;
+import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.RangeNotifier;
+import org.altbeacon.beacon.Region;
 
-public class MainActivity extends Fragment {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import uk.ac.edina.ibeacon.geofence.BeaconGeoFence;
+import uk.ac.edina.ibeacon.geofence.BeaconWrapper;
+
+
+public class MainActivity extends Fragment implements BeaconConsumer {
+
+    protected static final String TAG = "RangingActivity";
+    public static final String BEACON_LAYOUT_FOR_ESTIMOTE = "m:0-3=4c000215,i:4-19,i:20-21,i:22-23,p:24-24";
+    private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
     private TileView tileView;
     private Utils utils = new Utils();
 
-
+    List<BeaconGeoFence> beaconGeoFences = new ArrayList<BeaconGeoFence>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         PlacesFragment.SingleRow routeRow = getRow();
+
+        beaconManager.getBeaconParsers().add(new BeaconParser().
+                setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE));
+        beaconManager.bind(this);
+
         // Create our TileView
         tileView = new TileView(this.getActivity());
         // Set the minimum parameters
@@ -112,5 +142,127 @@ public class MainActivity extends Fragment {
 
     public PlacesFragment.SingleRow getRow() {
         return (PlacesFragment.SingleRow) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
+    }
+
+
+
+    @Override
+    public void onBeaconServiceConnect() {
+        beaconManager.setRangeNotifier(new RangeNotifier() {
+            @Override
+            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+                if (beacons.size() > 0) {
+
+                    for (Beacon beacon : beacons) {
+
+                        for (final BeaconGeoFence geoFence : beaconGeoFences) {
+
+                            geoFence.evaluateGeofence(new BeaconWrapper(beacon));
+
+                            Log.d(TAG, beacon.toString());
+
+
+                        }
+                    }
+
+                    /**************************** debug to display *******************/
+
+                    final StringBuilder debug = new StringBuilder();
+
+                    List<Beacon> sortedBeaconsByDistance = new ArrayList<Beacon>(beacons);
+
+                    Collections.sort(sortedBeaconsByDistance, new Comparator<Beacon>() {
+                        @Override
+                        public int compare(Beacon beacon, Beacon beacon2) {
+                            double test = beacon.getDistance() - beacon2.getDistance();
+                            return (int) Math.round(test * 100);
+                        }
+                    });
+
+
+                    for (Beacon b : sortedBeaconsByDistance) {
+                        debug.append(b.getId3()).append(": dis : ").append(b.getDistance()).append("\n");
+                    }
+                    /*MainMapView.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            distanceFromBeacon.setText(debug.toString());
+                        }
+                    });*/
+
+
+                    /**************************** end debug to display *******************/
+                }
+            }
+        });
+
+        try {
+            beaconManager.startRangingBeaconsInRegion(new Region("all beacons", null, null, null));
+        } catch (RemoteException e) {
+            Log.e(TAG, e.toString());
+        }
+    }
+
+    @Override
+    public Context getApplicationContext() {
+        return this.getActivity().getApplicationContext();
+    }
+
+    @Override
+    public void unbindService(ServiceConnection serviceConnection) {
+        this.getActivity().unbindService(serviceConnection);
+    }
+
+    @Override
+    public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
+        return this.getActivity().bindService(intent, serviceConnection, i);
+    }
+
+    private void addGeoFences() {
+        /*
+        GeoFenceAction highLightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);
+
+        GeoFenceAction alertDialogAction = new GeoFenceAlertDialogAction(MainMapView.this, "Enter Message", "Leave Message");
+        String printerHelpUrl = "http://www8.hp.com/uk/en/home.html";
+        GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
+        String lightBlueIbeaconMinorId = "59317";
+
+        BeaconGeoFence blueBeaconShowPrinterPage = new BeaconGeoFence(1,lightBlueIbeaconMinorId, alertDialogAction);
+        beaconGeoFences.add(blueBeaconShowPrinterPage);
+        */
+
+        /*GeoFenceAction highlightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);
+        GeoFenceAction geoFenceAudioAction = new GeoFenceAudioAction(MainMapView.this, "chime.mp3");
+        GeoFenceAction geoFenceAudioAction2 = new GeoFenceAudioAction(MainMapView.this, "notificationdetect.mp3");
+        GeoFenceAction alertDialogWelcome = new GeoFenceAlertDialogAction(MainMapView.this, "Welcome to EDINA", "Don't forget to leave FOB at reception!");
+        GeoFenceAction alertDialogPrinter = new GeoFenceAlertDialogAction(MainMapView.this, "Printer CSCH2a", "Bye bye Printer");
+        String printerHelpUrl = "http://www.okidata.com/printers/color/c830";
+        GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);*/
+        String lightBlueBeaconMinorId = "59317";
+        String blueberryBeaconMinorId = "24489";
+        String mintBeaconMinorId = "11097";
+
+        /*BeaconGeoFence blueBeaconHighlightMeetingRoom = new BeaconGeoFence(1.5,lightBlueBeaconMinorId, highlightEdinaMeetingRoom);
+        BeaconGeoFence blueberryBeaconPrinter = new BeaconGeoFence(1.5,blueberryBeaconMinorId, alertDialogPrinter);
+        BeaconGeoFence mintBeaconAlert = new BeaconGeoFence(1.5,mintBeaconMinorId, alertDialogWelcome);
+        BeaconGeoFence blueBeaconAudioAction = new BeaconGeoFence(1.5,lightBlueBeaconMinorId, geoFenceAudioAction2);
+        BeaconGeoFence mintBeaconAudioAction = new BeaconGeoFence(1.5,mintBeaconMinorId, geoFenceAudioAction);
+        BeaconGeoFence blueberryBeaconAudioAction = new BeaconGeoFence(1.5,blueberryBeaconMinorId, geoFenceAudioAction2);
+        beaconGeoFences.add(blueberryBeaconPrinter) ;
+        beaconGeoFences.add(blueBeaconHighlightMeetingRoom) ;
+        beaconGeoFences.add(blueBeaconAudioAction) ;
+        beaconGeoFences.add(blueberryBeaconAudioAction) ;
+        beaconGeoFences.add(mintBeaconAudioAction) ;
+        beaconGeoFences.add(mintBeaconAlert) ;*/
+
+    }
+
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        beaconManager.unbind(this);
     }
 }

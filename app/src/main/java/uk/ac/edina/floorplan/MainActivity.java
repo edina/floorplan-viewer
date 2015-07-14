@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.qozix.tileview.TileView;
@@ -23,9 +24,9 @@ public class MainActivity extends Fragment {
         PlacesFragment.SingleRow routeRow = getRow();
         // Create our TileView
         tileView = new TileView(this.getActivity());
-        //2000 × 2829 pixels
         // Set the minimum parameters
         int zoomF = 1;
+
         tileView.setSize(5657*zoomF, 4000*zoomF);
         tileView.addDetailLevel(1f /zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg");
 
@@ -40,14 +41,28 @@ public class MainActivity extends Fragment {
         // Add the view to display it
         tileView.setCacheEnabled(true);
         tileView.setTransitionsEnabled(false);
-        //tileView.setScale(0.5);
-        int x = routeRow.getPoint().getX();
-        int y = routeRow.getPoint().getY();
-        tileView.slideToAndCenter(x * zoomF, y * zoomF);
+        //tileView.setScale(2.0);
+        final int x = routeRow.getPoint().getX();
+        final int y = routeRow.getPoint().getY();
+
 
         tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
         Log.d("tag", "x = " + x + "  y = " + y);
         addPin(x, y);
+
+        tileView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                tileView.slideToAndCenter(x , y );
+                if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    tileView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                }
+                else {
+                    tileView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
 
         return  tileView;
 

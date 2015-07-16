@@ -31,13 +31,15 @@ import java.util.List;
 
 import uk.ac.edina.ibeacon.geofence.BeaconGeoFence;
 import uk.ac.edina.ibeacon.geofence.BeaconWrapper;
+import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAction;
+import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAlertDialogAction;
 
 
 public class MainActivity extends Fragment implements BeaconConsumer {
 
     protected static final String TAG = "RangingActivity";
     public static final String BEACON_LAYOUT_FOR_ESTIMOTE = "m:0-3=4c000215,i:4-19,i:20-21,i:22-23,p:24-24";
-    private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
+    private BeaconManager beaconManager ;
     private TileView tileView;
     private Utils utils = new Utils();
 
@@ -45,13 +47,13 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
         PlacesFragment.SingleRow routeRow = getRow();
 
         beaconManager.getBeaconParsers().add(new BeaconParser().
                 setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE));
         beaconManager.bind(this);
-
+        addGeoFences();
         // Create our TileView
         tileView = new TileView(this.getActivity());
         // Set the minimum parameters
@@ -169,7 +171,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
                     final StringBuilder debug = new StringBuilder();
 
-                    List<Beacon> sortedBeaconsByDistance = new ArrayList<Beacon>(beacons);
+                    List<Beacon> sortedBeaconsByDistance = new ArrayList<>(beacons);
 
                     Collections.sort(sortedBeaconsByDistance, new Comparator<Beacon>() {
                         @Override
@@ -219,17 +221,15 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     }
 
     private void addGeoFences() {
-        /*
-        GeoFenceAction highLightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);
 
-        GeoFenceAction alertDialogAction = new GeoFenceAlertDialogAction(MainMapView.this, "Enter Message", "Leave Message");
+
+        GeoFenceAction alertDialogAction = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Message", "Leave Message");
         String printerHelpUrl = "http://www8.hp.com/uk/en/home.html";
-        GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
-        String lightBlueIbeaconMinorId = "59317";
+        //GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
+        String lightBlueBeaconMinorId = "59317";
 
-        BeaconGeoFence blueBeaconShowPrinterPage = new BeaconGeoFence(1,lightBlueIbeaconMinorId, alertDialogAction);
-        beaconGeoFences.add(blueBeaconShowPrinterPage);
-        */
+        BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5,lightBlueBeaconMinorId, alertDialogAction);
+        beaconGeoFences.add(blueBeaconShowSampleAlert);
 
         /*GeoFenceAction highlightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);
         GeoFenceAction geoFenceAudioAction = new GeoFenceAudioAction(MainMapView.this, "chime.mp3");
@@ -238,7 +238,6 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         GeoFenceAction alertDialogPrinter = new GeoFenceAlertDialogAction(MainMapView.this, "Printer CSCH2a", "Bye bye Printer");
         String printerHelpUrl = "http://www.okidata.com/printers/color/c830";
         GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);*/
-        String lightBlueBeaconMinorId = "59317";
         String blueberryBeaconMinorId = "24489";
         String mintBeaconMinorId = "11097";
 

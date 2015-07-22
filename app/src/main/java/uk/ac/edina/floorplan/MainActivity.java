@@ -33,13 +33,14 @@ import uk.ac.edina.ibeacon.geofence.BeaconGeoFence;
 import uk.ac.edina.ibeacon.geofence.BeaconWrapper;
 import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAction;
 import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAlertDialogAction;
+import uk.ac.edina.ibeacon.geofence.actions.GeoFenceShowOnPlan;
 
 
 public class MainActivity extends Fragment implements BeaconConsumer {
 
     protected static final String TAG = "RangingActivity";
     public static final String BEACON_LAYOUT_FOR_ESTIMOTE = "m:0-3=4c000215,i:4-19,i:20-21,i:22-23,p:24-24";
-    private BeaconManager beaconManager ;
+    private BeaconManager beaconManager;
     private TileView tileView;
     private Utils utils = new Utils();
 
@@ -48,26 +49,28 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
-        PlacesFragment.SingleRow routeRow = getRow();
+        Area routeRow = getRow();
 
         int size = beaconManager.getBeaconParsers().size();
-        if(size == 0){
-            BeaconParser beaconParser = new BeaconParser();
-            beaconParser.setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE);
-            beaconManager.getBeaconParsers().add(beaconParser);
 
-        }
+        BeaconParser beaconParser = new BeaconParser();
+        beaconParser.setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE);
+        beaconManager.getBeaconParsers().add(beaconParser);
+
+
         beaconManager.bind(this);
-        addGeoFences();
+
         // Create our TileView
         tileView = new TileView(this.getActivity());
+
+        addGeoFences();
         // Set the minimum parameters
         int zoomF = 1;
 
-        tileView.setSize(5657*zoomF, 4000*zoomF);
-        tileView.addDetailLevel(1f /zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg");
+        tileView.setSize(5657 * zoomF, 4000 * zoomF);
+        tileView.addDetailLevel(1f / zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg");
 
-        tileView.addDetailLevel(0.5f /zoomF, "tiles/groundfloor/500/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg", 256, 256);
+        tileView.addDetailLevel(0.5f / zoomF, "tiles/groundfloor/500/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg", 256, 256);
 
         // bottom left of university 55.942584, -3.188343
         Utils.LatLon latLonM = utils.latLonToMeters(55.942584, -3.188343);
@@ -90,32 +93,28 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         tileView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                tileView.slideToAndCenter(x , y );
-                if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                //tileView.slideToAndCenter(x, y);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     tileView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                }
-                else {
+                } else {
                     tileView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 }
             }
         });
 
-        return  tileView;
-
+        return tileView;
 
 
         //setContentView(R.layout.activity_main);
     }
 
 
-    private void addPin( double x, double y ) {
-        ImageView imageView = new ImageView( this.getActivity() );
-        imageView.setImageResource( R.drawable.push_pin );
-        tileView.addMarker(imageView, x, y );
+    private void addPin(double x, double y) {
+        ImageView imageView = new ImageView(this.getActivity());
+        imageView.setImageResource(R.drawable.push_pin);
+        tileView.addMarker(imageView, x, y);
     }
-
-
 
 
     @Override
@@ -134,8 +133,8 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     }
 
 
-    public static MainActivity newInstance(PlacesFragment.SingleRow row) {
-        if(row == null){
+    public static MainActivity newInstance(Area row) {
+        if (row == null) {
             throw new NullPointerException("Need a map route row to display");
         }
         MainActivity f = new MainActivity();
@@ -147,10 +146,9 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         return f;
     }
 
-    public PlacesFragment.SingleRow getRow() {
-        return (PlacesFragment.SingleRow) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
+    public Area getRow() {
+        return (Area) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
     }
-
 
 
     @Override
@@ -233,8 +231,13 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         //GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
         String lightBlueBeaconMinorId = "59317";
 
-        BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5,lightBlueBeaconMinorId, alertDialogAction);
+        List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
+        GeoFenceAction exhibitionRoom = new GeoFenceShowOnPlan(areas.get(0), this.tileView, this.getActivity());
+
+        BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, lightBlueBeaconMinorId, exhibitionRoom);
         beaconGeoFences.add(blueBeaconShowSampleAlert);
+
+
 
         /*GeoFenceAction highlightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);
         GeoFenceAction geoFenceAudioAction = new GeoFenceAudioAction(MainMapView.this, "chime.mp3");
@@ -262,14 +265,12 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     }
 
 
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         try {
             beaconManager.unbind(this);
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e(this.getClass().getName(), e.getMessage());
         }
     }

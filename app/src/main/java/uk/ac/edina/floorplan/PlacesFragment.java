@@ -2,10 +2,10 @@ package uk.ac.edina.floorplan;
 
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by murrayking on 19/06/2015.
@@ -34,7 +33,7 @@ public class PlacesFragment extends ListFragment {
     boolean dualPane;
 
     // Currently selected item in the ListView
-    SingleRow selectedRow;
+    Area selectedRow;
 
 
     MyAdapter adapter;
@@ -44,6 +43,10 @@ public class PlacesFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
 
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()) {
+            mBluetoothAdapter.enable();
+        }
         // 1. Access the TextView defined in layout XML
         // and then set its text
         adapter = new MyAdapter(this.getActivity());
@@ -62,12 +65,12 @@ public class PlacesFragment extends ListFragment {
         // If the screen is rotated onSaveInstanceState() below will store the // hero most recently selected. Get the value attached to curChoice and // store it in mCurCheckPosition
         if (savedInstanceState != null) {
             // Restore last state for checked position.
-            selectedRow = (SingleRow)savedInstanceState.getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
+            selectedRow = (Area)savedInstanceState.getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
 
         }
         //first usage and no selection made
         if(selectedRow == null){
-            selectedRow =(SingleRow)adapter.getItem(0);
+            selectedRow =(Area)adapter.getItem(0);
         }
 
         if (dualPane) {
@@ -83,7 +86,7 @@ public class PlacesFragment extends ListFragment {
 
     }
 
-    private void goToMap(SingleRow row){
+    private void goToMap(Area row){
         // create an Intent to take you over to a new DetailActivity
 
         if (dualPane) {
@@ -138,84 +141,24 @@ public class PlacesFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        selectedRow =(SingleRow)adapter.getItem(position);
+        selectedRow =(Area)adapter.getItem(position);
         goToMap(selectedRow);
     }
 
-    static class ImagePixelLocation implements Serializable{
-        private int x;
-        private int y;
-
-        public ImagePixelLocation(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-    }
-
-    static class SingleRow implements Serializable {
-
-        private String title;
-        private int imageId;
-        private String description;
-        private ImagePixelLocation point;
-
-        public int getImageId() {
-            return imageId;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public ImagePixelLocation getPoint(){ return  point;}
-
-        SingleRow(String title, int imageId, String description, String locations) {
-            this.title = title;
-            this.imageId = imageId;
-            this.description = description;
-            String[] p = locations.split(",");
-            int x = Integer.valueOf(p[0]);
-            int y = Integer.valueOf(p[1]);
-            point = new ImagePixelLocation(x,y);
-        }
 
 
-    }
 
     class  MyAdapter extends BaseAdapter {
 
         private final Context context;
-        ArrayList<SingleRow> rows = new ArrayList<>();
+        List<Area> rows;
 
         MyAdapter(Context context) {
             this.context = context;
             Resources resources = context.getResources();
-            String[] titles = resources.getStringArray(R.array.titles);
-            String[] descriptions = resources.getStringArray(R.array.descriptions);
+            rows = FloorPlanAreas.getAreas(resources);
 
-            String[] locations = resources.getStringArray(R.array.locations);
-            TypedArray icons = resources.obtainTypedArray(R.array.route_list_icons);
-
-
-            for (int i = 0; i < titles.length; i++) {
-                rows.add(new SingleRow(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i]));
-            }
-
-        }
-
-        ;
+        };
 
         @Override
         public int getCount() {
@@ -239,11 +182,11 @@ public class PlacesFragment extends ListFragment {
             TextView title = (TextView) row.findViewById(R.id.textTitle);
             TextView description = (TextView) row.findViewById(R.id.textDescription);
             ImageView imageView = (ImageView) row.findViewById(R.id.trailIcon);
-            SingleRow singleRow = rows.get(i);
+            Area area = rows.get(i);
 
-            title.setText(singleRow.getTitle());
-            description.setText(singleRow.getDescription());
-            imageView.setImageResource(singleRow.getImageId());
+            title.setText(area.getTitle());
+            description.setText(area.getDescription());
+            imageView.setImageResource(area.getImageId());
             return row;
         }
     }

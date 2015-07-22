@@ -50,8 +50,13 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
         PlacesFragment.SingleRow routeRow = getRow();
 
-        beaconManager.getBeaconParsers().add(new BeaconParser().
-                setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE));
+        int size = beaconManager.getBeaconParsers().size();
+        if(size == 0){
+            BeaconParser beaconParser = new BeaconParser();
+            beaconParser.setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE);
+            beaconManager.getBeaconParsers().add(beaconParser);
+
+        }
         beaconManager.bind(this);
         addGeoFences();
         // Create our TileView
@@ -262,6 +267,10 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        beaconManager.unbind(this);
+        try {
+            beaconManager.unbind(this);
+        } catch (Exception e){
+            Log.e(this.getClass().getName(), e.getMessage());
+        }
     }
 }

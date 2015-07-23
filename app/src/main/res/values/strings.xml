@@ -29,4 +29,5 @@
         <item>The Main Library was designed by Sir Basil Spence. It was built in 1967.  and A-listed in 2005. Major redevelopment began in 2007, and was completed in Spring 2013.</item>
         <item>Staffed by both Library Helpdesk and Library Facilities staff. If you are visiting the library, or have lost your University card, this desk will be your first port of call.</item>
     </string-array>
+    <string name="title_activity_area_detail_view">AreaDetailView</string>
 </resources>

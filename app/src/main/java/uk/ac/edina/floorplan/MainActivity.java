@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.qozix.tileview.TileView;
@@ -93,7 +94,11 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
         tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
         Log.d("tag", "x = " + x + "  y = " + y);
-        addPin(x, y);
+        List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
+        for(Area a: areas){
+            addPin(a);
+        }
+
 
         tileView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -115,11 +120,48 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     }
 
 
-    private void addPin(double x, double y) {
-        ImageView imageView = new ImageView(this.getActivity());
-        imageView.setImageResource(R.drawable.push_pin);
-        tileView.addMarker(imageView, x, y);
+    private void addPin(Area area) {
+        ImageView marker = new ImageView(this.getActivity());
+        marker.setImageResource(R.drawable.push_pin);
+        int x = area.getPoint().getX();
+        int y = area.getPoint().getY();
+        marker.setTag(area);
+        marker.setOnClickListener(markerClickListener);
+        tileView.addMarker(marker, x, y);
     }
+    private View.OnClickListener markerClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick( View view ) {
+            // get reference to the TileView
+            TileView tileView = MainActivity.this.tileView;
+            // we saved the coordinate in the marker's tag
+            Area area = (Area) view.getTag();
+            // lets center the screen to that coordinate
+            int x = area.getPoint().getX();
+            int y = area.getPoint().getY();
+            tileView.slideToAndCenter(x, y);
+            // create a simple callout
+            View callout  = LayoutInflater.from(MainActivity.this.getActivity()).inflate(R.layout.callout_layout, null);
+
+            Button detailsButton = (Button)callout.findViewById(R.id.dismissGridDialog);
+            detailsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent viewDetails = new Intent(MainActivity.this.getActivity(), AreaDetailView.class);
+
+                    int i = 0;
+
+                    startActivity(viewDetails);
+
+                }
+            });
+            // add it to the view tree at the same position and offset as the marker that invoked it
+            tileView.addCallout( callout, x, y, -0.5f, -1.0f );
+
+        }
+    };
+
 
 
     @Override
@@ -239,10 +281,12 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         String purpleBeaconMinorId = "46010";
 
         List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
+
         GeoFenceAction exhibitionRoom = new GeoFenceShowOnPlan(areas.get(0), this.tileView, this.getActivity());
 
         BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, purpleBeaconMinorId, exhibitionRoom);
-        beaconGeoFences.add(blueBeaconShowSampleAlert);
+
+        //beaconGeoFences.add(blueBeaconShowSampleAlert);
 
 
 

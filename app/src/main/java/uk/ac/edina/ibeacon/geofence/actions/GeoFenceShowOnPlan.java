@@ -1,12 +1,8 @@
 package uk.ac.edina.ibeacon.geofence.actions;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.qozix.tileview.TileView;
 
@@ -37,18 +33,21 @@ public class GeoFenceShowOnPlan implements GeoFenceAction {
             @Override
             public void run() {
 
-                final Dialog dialog = new Dialog(activity, R.style.NewDialog);
+                //final Dialog dialog = new Dialog(activity, R.style.NewDialog);
+
+                View view  = LayoutInflater.from(activity).inflate(R.layout.callout_layout, null);
                 // Include dialog.xml file
-                dialog.setContentView(R.layout.grid_ref_dialog);
+                //dialog.setContentView(R.layout.callout_layout);
                 // Set dialog title
-                dialog.setTitle("Grid Reference");
+               // dialog.setTitle("Grid Reference");
 
-                TextView gridRefText = (TextView) dialog.findViewById(R.id.grid_ref);
-                TextView eastingsNorthings = (TextView) dialog.findViewById(R.id.eastingsNorthings);
-                TextView latLong =  (TextView) dialog.findViewById(R.id.latLong);
+                //TextView gridRefText = (TextView) dialog.findViewById(R.id.grid_ref);
+                //TextView eastingsNorthings = (TextView) dialog.findViewById(R.id.eastingsNorthings);
+                //TextView latLong =  (TextView) dialog.findViewById(R.id.latLong);
 
 
-
+                floorPlan.addCallout( view, x, y, -0.5f, -1.0f );
+                /*
                 eastingsNorthings.setText("easting  northing");
 
                 gridRefText.setText("gridRef");
@@ -66,7 +65,7 @@ public class GeoFenceShowOnPlan implements GeoFenceAction {
                     public void onClick(View view) {
                         dialog.dismiss();
                     }
-                });
+                });*/
                 floorPlan.slideToAndCenter(x,y);
             }
         });

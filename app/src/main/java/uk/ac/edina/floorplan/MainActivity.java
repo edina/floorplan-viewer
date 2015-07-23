@@ -234,12 +234,14 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         GeoFenceAction alertDialogAction = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Message", "Leave Message");
         String printerHelpUrl = "http://www8.hp.com/uk/en/home.html";
         //GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
+
         String lightBlueBeaconMinorId = "59317";
+        String purpleBeaconMinorId = "46010";
 
         List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
         GeoFenceAction exhibitionRoom = new GeoFenceShowOnPlan(areas.get(0), this.tileView, this.getActivity());
 
-        BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, lightBlueBeaconMinorId, exhibitionRoom);
+        BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, purpleBeaconMinorId, exhibitionRoom);
         beaconGeoFences.add(blueBeaconShowSampleAlert);
 
 

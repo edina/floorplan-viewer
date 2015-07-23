@@ -39,6 +39,7 @@ import uk.ac.edina.ibeacon.geofence.actions.GeoFenceShowOnPlan;
 public class MainActivity extends Fragment implements BeaconConsumer {
 
     protected static final String TAG = "RangingActivity";
+    private static  Boolean addBeaconParserDone = new Boolean(false);
     public static final String BEACON_LAYOUT_FOR_ESTIMOTE = "m:0-3=4c000215,i:4-19,i:20-21,i:22-23,p:24-24";
     private BeaconManager beaconManager;
     private TileView tileView;
@@ -51,11 +52,15 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
         Area routeRow = getRow();
 
-        int size = beaconManager.getBeaconParsers().size();
+        synchronized (addBeaconParserDone) {
+            if (addBeaconParserDone == false) {
 
-        BeaconParser beaconParser = new BeaconParser();
-        beaconParser.setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE);
-        beaconManager.getBeaconParsers().add(beaconParser);
+                BeaconParser beaconParser = new BeaconParser();
+                beaconParser.setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE);
+                beaconManager.getBeaconParsers().add(beaconParser);
+                addBeaconParserDone = true;
+            }
+        }
 
 
         beaconManager.bind(this);

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qozix.tileview.TileView;
 
@@ -103,7 +104,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         tileView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                //tileView.slideToAndCenter(x, y);
+                tileView.slideToAndCenter(x, y);
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     tileView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
@@ -121,6 +122,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
 
     private void addPin(Area area) {
+
         ImageView marker = new ImageView(this.getActivity());
         marker.setImageResource(R.drawable.push_pin);
         int x = area.getPoint().getX();
@@ -128,6 +130,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         marker.setTag(area);
         marker.setOnClickListener(markerClickListener);
         tileView.addMarker(marker, x, y);
+
     }
     private View.OnClickListener markerClickListener = new View.OnClickListener() {
 
@@ -144,7 +147,12 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             // create a simple callout
             View callout  = LayoutInflater.from(MainActivity.this.getActivity()).inflate(R.layout.callout_layout, null);
 
-            Button detailsButton = (Button)callout.findViewById(R.id.dismissGridDialog);
+            TextView calloutTitle = (TextView)callout.findViewById(R.id.calloutTitle);
+            calloutTitle.setText(area.getTitle());
+            TextView calloutDescription = (TextView)callout.findViewById(R.id.calloutDescription);
+            calloutDescription.setText(area.getDescription());
+
+            Button detailsButton = (Button)callout.findViewById(R.id.areaDetails);
             detailsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

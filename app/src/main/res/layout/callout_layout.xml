@@ -1,59 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent" android:gravity="center"
-    android:padding="10dp"
-    android:background="@color/White"
+    android:padding="30dp"
+    android:background="@drawable/callout_border"
+
     android:layout_height="match_parent">
 
-
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OS Grid Ref:"
-        android:id="@+id/textView3"
-
- />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/grid_ref"
- />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Area Title"
+        android:id="@+id/calloutTitle" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eastings, Northings:"
-        android:id="@+id/textView4"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/eastingsNorthings"
- />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latitude, Longitude:"
-        android:id="@+id/textView6"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/latLong"
-
-        android:paddingBottom="15dp"/>
+        android:layout_width="200dp"
+        android:text="Description"
+        android:id="@+id/calloutDescription" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dismiss"
-        android:id="@+id/dismissGridDialog"
- />
+        android:text="More ..."
+        android:id="@+id/areaDetails" />
 </LinearLayout>

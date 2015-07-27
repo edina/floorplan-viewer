@@ -139,7 +139,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             // get reference to the TileView
             TileView tileView = MainActivity.this.tileView;
             // we saved the coordinate in the marker's tag
-            Area area = (Area) view.getTag();
+            final Area area = (Area) view.getTag();
             // lets center the screen to that coordinate
             int x = area.getPoint().getX();
             int y = area.getPoint().getY();
@@ -158,7 +158,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
                 public void onClick(View view) {
                     Intent viewDetails = new Intent(MainActivity.this.getActivity(), AreaDetailView.class);
 
-                    int i = 0;
+                    viewDetails.putExtra(PlacesFragment.AREA_KEY, area);
 
                     startActivity(viewDetails);
 
@@ -188,13 +188,13 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     }
 
 
-    public static MainActivity newInstance(Area row) {
-        if (row == null) {
+    public static MainActivity newInstance(Area area) {
+        if (area == null) {
             throw new NullPointerException("Need a map route row to display");
         }
         MainActivity f = new MainActivity();
         Bundle args = new Bundle();
-        args.putSerializable(PlacesFragment.ROUTE_CHOSEN_KEY, row);
+        args.putSerializable(PlacesFragment.AREA_KEY, area);
 
         f.setArguments(args);
 
@@ -202,7 +202,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     }
 
     public Area getRow() {
-        return (Area) getArguments().getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
+        return (Area) getArguments().getSerializable(PlacesFragment.AREA_KEY);
     }
 
 

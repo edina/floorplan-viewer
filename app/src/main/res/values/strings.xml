@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-
+    <string name="inital_Time">0 min, 0 sec</string>
     <string-array name="titles">
         <item>1 Entrance</item>
         <item>2 Reception Desk </item>
@@ -30,4 +30,10 @@
         <item>Staffed by both Library Helpdesk and Library Facilities staff. If you are visiting the library, or have lost your University card, this desk will be your first port of call.</item>
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
+
+    <array name="area_images" >
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+
+    </array>
 </resources>

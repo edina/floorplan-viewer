@@ -24,7 +24,7 @@ public class PlacesFragment extends ListFragment {
 
 
 
-    public static final String ROUTE_CHOSEN_KEY = "ROUTE_CHOSEN_KEY";
+    public static final String AREA_KEY = "AREA_KEY";
 
 
 
@@ -65,7 +65,7 @@ public class PlacesFragment extends ListFragment {
         // If the screen is rotated onSaveInstanceState() below will store the // hero most recently selected. Get the value attached to curChoice and // store it in mCurCheckPosition
         if (savedInstanceState != null) {
             // Restore last state for checked position.
-            selectedRow = (Area)savedInstanceState.getSerializable(PlacesFragment.ROUTE_CHOSEN_KEY);
+            selectedRow = (Area)savedInstanceState.getSerializable(PlacesFragment.AREA_KEY);
 
         }
         //first usage and no selection made
@@ -121,7 +121,7 @@ public class PlacesFragment extends ListFragment {
 
             Intent detailIntent = new Intent(this.getActivity(), DetailActivity.class);
 
-            detailIntent.putExtra(ROUTE_CHOSEN_KEY, row);
+            detailIntent.putExtra(AREA_KEY, row);
 
             this.getActivity().startActivity(detailIntent);
         }
@@ -133,7 +133,7 @@ public class PlacesFragment extends ListFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(PlacesFragment.ROUTE_CHOSEN_KEY, selectedRow);
+        outState.putSerializable(PlacesFragment.AREA_KEY, selectedRow);
     }
 
 

@@ -39,5 +39,25 @@ public class Area implements Serializable{
         point = new ImagePixelLocation(x, y);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Area area = (Area) o;
+
+        if (imageId != area.imageId) return false;
+        if (title != null ? !title.equals(area.title) : area.title != null) return false;
+        if (description != null ? !description.equals(area.description) : area.description != null)
+            return false;
+        return !(point != null ? !point.equals(area.point) : area.point != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (point != null ? point.hashCode() : 0);
+        return result;
+    }
 }

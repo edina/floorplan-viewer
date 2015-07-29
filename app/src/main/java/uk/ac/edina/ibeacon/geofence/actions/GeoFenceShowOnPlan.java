@@ -1,13 +1,12 @@
 package uk.ac.edina.ibeacon.geofence.actions;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.qozix.tileview.TileView;
 
 import uk.ac.edina.floorplan.Area;
-import uk.ac.edina.floorplan.R;
+import uk.ac.edina.floorplan.CalloutFactory;
 
 /**
  * Created by murrayking on 22/07/2015.
@@ -32,40 +31,12 @@ public class GeoFenceShowOnPlan implements GeoFenceAction {
 
             @Override
             public void run() {
+                CalloutFactory calloutFactory = new CalloutFactory();
+                View callout = calloutFactory.createCallout(activity, area);
 
-                //final Dialog dialog = new Dialog(activity, R.style.NewDialog);
+                // add it to the view tree at the same position and offset as the marker that invoked it
+                floorPlan.addCallout( callout, x, y, -0.5f, -1.0f );
 
-                View view  = LayoutInflater.from(activity).inflate(R.layout.callout_layout, null);
-                // Include dialog.xml file
-                //dialog.setContentView(R.layout.callout_layout);
-                // Set dialog title
-               // dialog.setTitle("Grid Reference");
-
-                //TextView gridRefText = (TextView) dialog.findViewById(R.id.grid_ref);
-                //TextView eastingsNorthings = (TextView) dialog.findViewById(R.id.eastingsNorthings);
-                //TextView latLong =  (TextView) dialog.findViewById(R.id.latLong);
-
-
-                floorPlan.addCallout( view, x, y, -0.5f, -1.0f );
-                /*
-                eastingsNorthings.setText("easting  northing");
-
-                gridRefText.setText("gridRef");
-
-                latLong.setText("latt  lont");
-
-                Window window = dialog.getWindow();
-                window.setGravity(Gravity.TOP);
-
-                dialog.show();
-
-                Button dismissGridDialog = (Button) dialog.findViewById(R.id.dismissGridDialog);
-                dismissGridDialog.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });*/
                 floorPlan.slideToAndCenter(x,y);
             }
         });

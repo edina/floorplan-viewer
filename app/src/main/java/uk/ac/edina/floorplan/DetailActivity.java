@@ -19,7 +19,7 @@ public class DetailActivity extends Activity{
                 return;
             }
 
-            // Check if we have any hero data saved
+
             if (savedInstanceState == null) {
 
                 // If not then create the DetailsFragment

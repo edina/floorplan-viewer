@@ -12,9 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.qozix.tileview.TileView;
 
@@ -141,35 +139,14 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             // we saved the coordinate in the marker's tag
             final Area area = (Area) view.getTag();
             // lets center the screen to that coordinate
-            int x = area.getPoint().getX();
-            int y = area.getPoint().getY();
-            tileView.slideToAndCenter(x, y);
-            // create a simple callout
-            View callout  = LayoutInflater.from(MainActivity.this.getActivity()).inflate(R.layout.callout_layout, null);
+            CalloutFactory calloutFactory = new CalloutFactory();
+            View callout = calloutFactory.createCallout(MainActivity.this.getActivity(), area);
 
-            TextView calloutTitle = (TextView)callout.findViewById(R.id.calloutTitle);
-            calloutTitle.setText(area.getTitle());
-            TextView calloutDescription = (TextView)callout.findViewById(R.id.calloutDescription);
-            calloutDescription.setText(area.getDescription());
-
-            Button detailsButton = (Button)callout.findViewById(R.id.areaDetails);
-            detailsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent viewDetails = new Intent(MainActivity.this.getActivity(), AreaDetailView.class);
-
-                    viewDetails.putExtra(PlacesFragment.AREA_KEY, area);
-
-                    startActivity(viewDetails);
-
-                }
-            });
             // add it to the view tree at the same position and offset as the marker that invoked it
-            tileView.addCallout( callout, x, y, -0.5f, -1.0f );
+            tileView.addCallout( callout, area.getPoint().getX(), area.getPoint().getY(), -0.5f, -1.0f );
 
         }
     };
-
 
 
     @Override
@@ -286,7 +263,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         //GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
 
         String lightBlueBeaconMinorId = "59317";
-        String purpleBeaconMinorId = "46010";
+        String purpleBeaconMinorId = "24489";
 
         List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
 
@@ -294,7 +271,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
         BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, purpleBeaconMinorId, exhibitionRoom);
 
-        //beaconGeoFences.add(blueBeaconShowSampleAlert);
+        beaconGeoFences.add(blueBeaconShowSampleAlert);
 
 
 
@@ -333,4 +310,6 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             Log.e(this.getClass().getName(), e.getMessage());
         }
     }
+
+
 }

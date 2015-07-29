@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -20,7 +21,7 @@ public class AreaDetailView extends Activity {
     private double timeElapsed = 0, finalTime = 0;
     private int forwardTime = 2000, backwardTime = 2000;
     private Handler durationHandler = new Handler();
-    private SeekBar seekbar;
+    private SeekBar seekBar;
     private TextView areaDetailsDescription;
 
     @Override
@@ -46,19 +47,34 @@ public class AreaDetailView extends Activity {
         mediaPlayer = MediaPlayer.create(this, R.raw.sample_song);
         finalTime = mediaPlayer.getDuration();
         duration = (TextView) findViewById(R.id.duration);
-        seekbar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
         areaDetailsTitle.setText(area.getTitle());
         areaDetailsImage.setImageResource(area.getImageId());
         areaDetailsDescription.setText(area.getDescription());
-        seekbar.setMax((int) finalTime);
-        seekbar.setClickable(false);
+        seekBar.setMax((int) finalTime);
+        seekBar.setClickable(true);
+
+        seekBar.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                seekChange(v);
+                return false;
+            }
+        });
+    }
+
+
+    private void seekChange(View v){
+        if(mediaPlayer.isPlaying()){
+            SeekBar sb = (SeekBar)v;
+            mediaPlayer.seekTo(sb.getProgress());
+        }
     }
 
     // play mp3 song
     public void play(View view) {
         mediaPlayer.start();
         timeElapsed = mediaPlayer.getCurrentPosition();
-        seekbar.setProgress((int) timeElapsed);
+        seekBar.setProgress((int) timeElapsed);
         durationHandler.postDelayed(updateSeekBarTime, 100);
     }
 
@@ -67,11 +83,11 @@ public class AreaDetailView extends Activity {
         public void run() {
             //get current position
             timeElapsed = mediaPlayer.getCurrentPosition();
-            //set seekbar progress
-            seekbar.setProgress((int) timeElapsed);
+            //set seekBar progress
+            seekBar.setProgress((int) timeElapsed);
             //set time remaing
-            double timeRemaining = finalTime - timeElapsed;
-            duration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining), TimeUnit.MILLISECONDS.toSeconds((long) timeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining))));
+
+            duration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) timeElapsed), TimeUnit.MILLISECONDS.toSeconds((long) timeElapsed) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) timeElapsed))));
 
             //repeat yourself that again in 100 miliseconds
             durationHandler.postDelayed(this, 100);

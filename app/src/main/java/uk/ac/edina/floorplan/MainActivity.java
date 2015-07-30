@@ -143,7 +143,10 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             View callout = calloutFactory.createCallout(MainActivity.this.getActivity(), area);
 
             // add it to the view tree at the same position and offset as the marker that invoked it
-            tileView.addCallout( callout, area.getPoint().getX(), area.getPoint().getY(), -0.5f, -1.0f );
+            int x = area.getPoint().getX(),y = area.getPoint().getY();
+            tileView.addCallout( callout, x, y, -0.5f, -1.0f );
+            tileView.setScale(3.0);
+            tileView.slideToAndCenter(x,y);
 
         }
     };

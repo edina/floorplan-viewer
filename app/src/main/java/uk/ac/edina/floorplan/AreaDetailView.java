@@ -25,6 +25,14 @@ public class AreaDetailView extends Activity {
     private TextView areaDetailsDescription;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if(mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

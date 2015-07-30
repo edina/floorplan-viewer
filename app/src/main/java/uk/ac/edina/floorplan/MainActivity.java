@@ -69,6 +69,8 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         tileView = new TileView(this.getActivity());
 
         addGeoFences();
+
+
         // Set the minimum parameters
         int zoomF = 1;
 

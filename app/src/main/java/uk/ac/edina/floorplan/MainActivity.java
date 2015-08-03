@@ -276,8 +276,26 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
         BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, purpleBeaconMinorId, exhibitionRoom);
 
+        GeoFenceAction debug27600 = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Icy Marshmallow 27600", "Leave Icy Marshmallow 27600" );
+
+        GeoFenceAction debug59317 = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Icy Marshmallow 59317", "Leave Icy Marshmallow 59317" );
+        GeoFenceAction debug43808 = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Mint Cocktail 43808", "Leave Mint Cocktail 43808");
+
+
+        BeaconGeoFence icyMarshmallow27600 = new BeaconGeoFence(5, "27600", debug27600);
+
+
+        BeaconGeoFence icyMarshmallow59317 = new BeaconGeoFence(5, "59317", debug59317);
+
+
+        BeaconGeoFence mintCocktail43808 = new BeaconGeoFence(5, "43808", debug43808);
+
         beaconGeoFences.add(blueBeaconShowSampleAlert);
 
+
+        beaconGeoFences.add(icyMarshmallow27600);
+        beaconGeoFences.add(mintCocktail43808);
+        beaconGeoFences.add(icyMarshmallow59317);
 
 
         /*GeoFenceAction highlightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);

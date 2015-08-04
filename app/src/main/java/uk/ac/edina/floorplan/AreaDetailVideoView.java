@@ -13,6 +13,7 @@ import android.widget.VideoView;
 
 public class AreaDetailVideoView extends Activity {
 
+    public static final String POSITION = "Position";
     private VideoView myVideoView;
     private int position = 0;
     private ProgressDialog progressDialog;
@@ -31,6 +32,8 @@ public class AreaDetailVideoView extends Activity {
 
         // Find your VideoView in your video_main.xml layout
         myVideoView = (VideoView) findViewById(R.id.video_view);
+
+        position = savedInstanceState.getInt(POSITION);
 
         Intent previousIntent = getIntent();
 
@@ -59,16 +62,13 @@ public class AreaDetailVideoView extends Activity {
         }
 
         myVideoView.requestFocus();
+
         myVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             // Close the progress bar and play the video
             public void onPrepared(MediaPlayer mp) {
                 progressDialog.dismiss();
                 myVideoView.seekTo(position);
-                if (position == 0) {
-                    myVideoView.start();
-                } else {
-                    myVideoView.pause();
-                }
+                myVideoView.start();
             }
         });
 
@@ -77,14 +77,14 @@ public class AreaDetailVideoView extends Activity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt("Position", myVideoView.getCurrentPosition());
+        savedInstanceState.putInt(POSITION, myVideoView.getCurrentPosition());
         myVideoView.pause();
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        position = savedInstanceState.getInt("Position");
+        position = savedInstanceState.getInt(POSITION);
         myVideoView.seekTo(position);
     }
 }

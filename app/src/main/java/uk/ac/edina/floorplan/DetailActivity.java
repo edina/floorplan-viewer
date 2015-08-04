@@ -1,7 +1,6 @@
 package uk.ac.edina.floorplan;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 /**
@@ -12,12 +11,12 @@ public class DetailActivity extends Activity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             // Check if the device is in landscape mode
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            /*if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 // If the screen is now in landscape mode, we can show the
                 // dialog in-line with the list so we don't need this activity.
                 finish();
                 return;
-            }
+            }*/
 
 
             if (savedInstanceState == null) {

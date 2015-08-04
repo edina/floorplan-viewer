@@ -36,4 +36,5 @@
         <item>@drawable/image_2</item>
 
     </array>
+    <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
 </resources>

@@ -49,6 +49,10 @@
             android:name=".AreaDetailView"
             android:label="@string/title_activity_area_detail_view" >
         </activity>
+        <activity
+            android:name=".AreaDetailVideoView"
+            android:label="@string/title_activity_area_detail_video_view" >
+        </activity>
     </application>
 
 </manifest>

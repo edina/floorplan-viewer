@@ -28,7 +28,7 @@ public class CalloutFactory {
         detailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent viewDetails = new Intent(activity, AreaDetailView.class);
+                Intent viewDetails = new Intent(activity, AreaDetailVideoView.class);
 
                 viewDetails.putExtra(PlacesFragment.AREA_KEY, area);
 

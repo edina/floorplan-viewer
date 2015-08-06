@@ -30,7 +30,7 @@ public class CalloutFactory {
             public void onClick(View view) {
                 Intent viewDetails = new Intent(activity, AreaDetailVideoView.class);
 
-                viewDetails.putExtra(PlacesFragment.AREA_KEY, area);
+                viewDetails.putExtra(AreasList.AREA_KEY, area);
 
                 activity.startActivity(viewDetails);
 

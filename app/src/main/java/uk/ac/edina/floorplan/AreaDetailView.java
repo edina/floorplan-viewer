@@ -47,7 +47,7 @@ public class AreaDetailView extends Activity {
     public void initializeViews(){
         Intent previousIntent = getIntent();
 
-        Area area = (Area)previousIntent.getSerializableExtra(PlacesFragment.AREA_KEY);
+        Area area = (Area)previousIntent.getSerializableExtra(AreasList.AREA_KEY);
 
         areaDetailsTitle = (TextView) findViewById(R.id.areaDetailTitle);
         areaDetailsImage = (ImageView)findViewById(R.id.areaDetailsImage);

@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment class="uk.ac.edina.floorplan.PlacesFragment"
-        android:id="@+id/titles"
+    <ListView
+        android:id="@+id/areasList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/places_row_layout" />

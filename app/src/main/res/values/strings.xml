@@ -37,4 +37,5 @@
 
     </array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
+    <string name="title_floor_plan">Floor Plan</string>
 </resources>

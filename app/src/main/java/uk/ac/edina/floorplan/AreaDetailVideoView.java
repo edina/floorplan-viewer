@@ -33,11 +33,13 @@ public class AreaDetailVideoView extends Activity {
         // Find your VideoView in your video_main.xml layout
         myVideoView = (VideoView) findViewById(R.id.video_view);
 
-        position = savedInstanceState.getInt(POSITION);
+        if(savedInstanceState != null){
+            position = savedInstanceState.getInt(POSITION);
+        }
 
         Intent previousIntent = getIntent();
 
-        Area area = (Area)previousIntent.getSerializableExtra(PlacesFragment.AREA_KEY);
+        Area area = (Area)previousIntent.getSerializableExtra(AreasList.AREA_KEY);
 
         TextView areaDetailsTitle = (TextView) findViewById(R.id.areaDetailVideoTitle);
 

@@ -1,16 +1,14 @@
 package uk.ac.edina.floorplan;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
@@ -19,7 +17,6 @@ import com.qozix.tileview.TileView;
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
-import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
@@ -36,7 +33,7 @@ import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAlertDialogAction;
 import uk.ac.edina.ibeacon.geofence.actions.GeoFenceShowOnPlan;
 
 
-public class MainActivity extends Fragment implements BeaconConsumer {
+public class MainActivity extends Activity implements BeaconConsumer {
 
     protected static final String TAG = "RangingActivity";
     private static  Boolean addBeaconParserDone = new Boolean(false);
@@ -45,14 +42,17 @@ public class MainActivity extends Fragment implements BeaconConsumer {
     private TileView tileView;
     private Utils utils = new Utils();
 
-    List<BeaconGeoFence> beaconGeoFences = new ArrayList<BeaconGeoFence>();
+    List<BeaconGeoFence> beaconGeoFences = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        beaconManager = BeaconManager.getInstanceForApplication(this.getActivity());
-        Area routeRow = getRow();
+     public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        //beaconManager = BeaconManager.getInstanceForApplication(this.getApplicationContext());
+        Intent previousIntent = getIntent();
 
-        synchronized (addBeaconParserDone) {
+        Area area = (Area)previousIntent.getSerializableExtra(AreasList.AREA_KEY);
+
+        /*synchronized (addBeaconParserDone) {
             if (addBeaconParserDone == false) {
 
                 BeaconParser beaconParser = new BeaconParser();
@@ -60,13 +60,13 @@ public class MainActivity extends Fragment implements BeaconConsumer {
                 beaconManager.getBeaconParsers().add(beaconParser);
                 addBeaconParserDone = true;
             }
-        }
+        }*/
 
 
-        beaconManager.bind(this);
+        //beaconManager.bind(this);
 
         // Create our TileView
-        tileView = new TileView(this.getActivity());
+        tileView = new TileView(this);
 
         addGeoFences();
 
@@ -89,8 +89,8 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         tileView.setCacheEnabled(true);
         tileView.setTransitionsEnabled(false);
         //tileView.setScale(2.0);
-        final int x = routeRow.getPoint().getX();
-        final int y = routeRow.getPoint().getY();
+        final int x = area.getPoint().getX();
+        final int y = area.getPoint().getY();
 
 
         tileView.setMarkerAnchorPoints(-0.5f, -0.5f);
@@ -99,6 +99,14 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         for(Area a: areas){
             addPin(a);
         }
+
+
+
+
+        //setContentView(R.layout.activity_main);
+        setContentView( tileView );
+
+
 
 
         tileView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -114,16 +122,12 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             }
         });
 
-        return tileView;
-
-
-        //setContentView(R.layout.activity_main);
     }
 
 
     private void addPin(Area area) {
 
-        ImageView marker = new ImageView(this.getActivity());
+        ImageView marker = new ImageView(this);
         marker.setImageResource(R.drawable.push_pin);
         int x = area.getPoint().getX();
         int y = area.getPoint().getY();
@@ -142,7 +146,7 @@ public class MainActivity extends Fragment implements BeaconConsumer {
             final Area area = (Area) view.getTag();
             // lets center the screen to that coordinate
             CalloutFactory calloutFactory = new CalloutFactory();
-            View callout = calloutFactory.createCallout(MainActivity.this.getActivity(), area);
+            View callout = calloutFactory.createCallout(MainActivity.this, area);
 
             // add it to the view tree at the same position and offset as the marker that invoked it
             int x = area.getPoint().getX(),y = area.getPoint().getY();
@@ -169,23 +173,6 @@ public class MainActivity extends Fragment implements BeaconConsumer {
         return super.onOptionsItemSelected(item);
     }
 
-
-    public static MainActivity newInstance(Area area) {
-        if (area == null) {
-            throw new NullPointerException("Need a map route row to display");
-        }
-        MainActivity f = new MainActivity();
-        Bundle args = new Bundle();
-        args.putSerializable(PlacesFragment.AREA_KEY, area);
-
-        f.setArguments(args);
-
-        return f;
-    }
-
-    public Area getRow() {
-        return (Area) getArguments().getSerializable(PlacesFragment.AREA_KEY);
-    }
 
 
     @Override
@@ -247,23 +234,23 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
     @Override
     public Context getApplicationContext() {
-        return this.getActivity().getApplicationContext();
+        return this.getApplicationContext();
     }
 
     @Override
     public void unbindService(ServiceConnection serviceConnection) {
-        this.getActivity().unbindService(serviceConnection);
+        this.unbindService(serviceConnection);
     }
 
     @Override
     public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
-        return this.getActivity().bindService(intent, serviceConnection, i);
+        return this.bindService(intent, serviceConnection, i);
     }
 
     private void addGeoFences() {
 
 
-        GeoFenceAction alertDialogAction = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Message", "Leave Message");
+        GeoFenceAction alertDialogAction = new GeoFenceAlertDialogAction(this, "Enter Message", "Leave Message");
         String printerHelpUrl = "http://www8.hp.com/uk/en/home.html";
         //GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
 
@@ -272,14 +259,14 @@ public class MainActivity extends Fragment implements BeaconConsumer {
 
         List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
 
-        GeoFenceAction exhibitionRoom = new GeoFenceShowOnPlan(areas.get(0), this.tileView, this.getActivity());
+        GeoFenceAction exhibitionRoom = new GeoFenceShowOnPlan(areas.get(0), this.tileView, this);
 
         BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, purpleBeaconMinorId, exhibitionRoom);
 
-        GeoFenceAction debug27600 = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Icy Marshmallow 27600", "Leave Icy Marshmallow 27600" );
+        GeoFenceAction debug27600 = new GeoFenceAlertDialogAction(this, "Enter Icy Marshmallow 27600", "Leave Icy Marshmallow 27600" );
 
-        GeoFenceAction debug59317 = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Icy Marshmallow 59317", "Leave Icy Marshmallow 59317" );
-        GeoFenceAction debug43808 = new GeoFenceAlertDialogAction(this.getActivity(), "Enter Mint Cocktail 43808", "Leave Mint Cocktail 43808");
+        GeoFenceAction debug59317 = new GeoFenceAlertDialogAction(this, "Enter Icy Marshmallow 59317", "Leave Icy Marshmallow 59317" );
+        GeoFenceAction debug43808 = new GeoFenceAlertDialogAction(this, "Enter Mint Cocktail 43808", "Leave Mint Cocktail 43808");
 
 
         BeaconGeoFence icyMarshmallow27600 = new BeaconGeoFence(5, "27600", debug27600);

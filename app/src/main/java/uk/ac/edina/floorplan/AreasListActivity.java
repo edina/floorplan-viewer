@@ -1,6 +1,5 @@
 package uk.ac.edina.floorplan;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +19,7 @@ import java.util.List;
 /**
  * Created by murrayking on 19/06/2015.
  */
-public class AreasList extends Activity {
+public class AreasListActivity extends FloorPlanBaseActivity {
 
 
 
@@ -55,7 +54,7 @@ public class AreasList extends Activity {
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
-            selectedRow = (Area)savedInstanceState.getSerializable(AreasList.AREA_KEY);
+            selectedRow = (Area)savedInstanceState.getSerializable(AreasListActivity.AREA_KEY);
 
         }
         //first usage and no selection made
@@ -70,7 +69,7 @@ public class AreasList extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 final Area area = (Area) parent.getItemAtPosition(position);
-                Intent detailIntent = new Intent(AreasList.this, MainActivity.class);
+                Intent detailIntent = new Intent(AreasListActivity.this, FloorPlanViewActivity.class);
 
                 detailIntent.putExtra(AREA_KEY, area);
 
@@ -81,13 +80,23 @@ public class AreasList extends Activity {
 
     }
 
+    @Override
+    public boolean acceptBeaconNotifications() {
+        return false;
+    }
+
+    @Override
+    public boolean removeNavigationHistory() {
+        return false;
+    }
+
     // Called every time the screen orientation changes or Android kills an Activity
     // to conserve resources
     // We save the last item selected in the list here and attach it to the key curChoice
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(AreasList.AREA_KEY, selectedRow);
+        outState.putSerializable(AreasListActivity.AREA_KEY, selectedRow);
     }
 
 

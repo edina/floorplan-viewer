@@ -28,9 +28,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name=".FloorPlanApplication">
         <activity
-            android:name=".AreasList"
+            android:name=".AreasListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,11 +44,11 @@
             android:label="@string/title_activity_area_detail_view" >
         </activity>
         <activity
-            android:name=".AreaDetailVideoView"
+            android:name=".AreaDetailVideoViewActivity"
             android:label="@string/title_activity_area_detail_video_view" >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".FloorPlanViewActivity"
             android:label="@string/title_floor_plan" >
         </activity>
     </application>

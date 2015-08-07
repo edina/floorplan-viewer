@@ -34,7 +34,6 @@ public class GeoFenceShowOnPlan implements GeoFenceAction {
                 CalloutFactory calloutFactory = new CalloutFactory();
                 View callout = calloutFactory.createCallout(activity, area);
 
-                // add it to the view tree at the same position and offset as the marker that invoked it
                 floorPlan.addCallout( callout, x, y, -0.5f, -1.0f );
 
                 floorPlan.slideToAndCenter(x,y);

@@ -1,6 +1,5 @@
 package uk.ac.edina.floorplan;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -11,7 +10,7 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class AreaDetailVideoView extends Activity {
+public class AreaDetailVideoViewActivity extends FloorPlanBaseActivity {
 
     public static final String POSITION = "Position";
     private VideoView myVideoView;
@@ -20,14 +19,14 @@ public class AreaDetailVideoView extends Activity {
     private MediaController mediaControls;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Get the layout from video_main.xml
         setContentView(R.layout.activity_area_detail_video_view);
 
         if (mediaControls == null) {
-            mediaControls = new MediaController(AreaDetailVideoView.this);
+            mediaControls = new MediaController(AreaDetailVideoViewActivity.this);
         }
 
         // Find your VideoView in your video_main.xml layout
@@ -39,12 +38,12 @@ public class AreaDetailVideoView extends Activity {
 
         Intent previousIntent = getIntent();
 
-        Area area = (Area)previousIntent.getSerializableExtra(AreasList.AREA_KEY);
+        Area area = (Area)previousIntent.getSerializableExtra(AreasListActivity.AREA_KEY);
 
         TextView areaDetailsTitle = (TextView) findViewById(R.id.areaDetailVideoTitle);
 
         // Create a progressbar
-        progressDialog = new ProgressDialog(AreaDetailVideoView.this);
+        progressDialog = new ProgressDialog(AreaDetailVideoViewActivity.this);
         // Set progressbar title
         progressDialog.setTitle("Loading Video Resource");
         // Set progressbar message
@@ -74,6 +73,16 @@ public class AreaDetailVideoView extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public boolean acceptBeaconNotifications() {
+        return false;
+    }
+
+    @Override
+    public boolean removeNavigationHistory() {
+        return false;
     }
 
     @Override

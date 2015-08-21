@@ -1,6 +1,8 @@
 package uk.ac.edina.floorplan;
 
 import android.content.Intent;
+import android.graphics.CornerPathEffect;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 
 import com.qozix.tileview.TileView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,7 +22,14 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
     private TileView tileView;
     private Utils utils = new Utils();
 
-
+    private ArrayList<double[]> points = new ArrayList<>();
+    {
+        points.add( new double[] { 1000, 1000 } );
+        points.add( new double[] { 2000, 1000 } );
+        points.add( new double[] { 2000, 2000 } );
+        points.add( new double[] { 1000, 2000 } );
+        points.add( new double[] { 1000, 1000 } );
+    }
 
     @Override
      public void onCreate(Bundle savedInstanceState){
@@ -29,30 +39,18 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
 
         Area area = (Area)previousIntent.getSerializableExtra(AreasListActivity.AREA_KEY);
 
-        /*synchronized (addBeaconParserDone) {
-            if (addBeaconParserDone == false) {
-
-
-                addBeaconParserDone = true;
-            }
-        }*/
-
-
-        //
 
         // Create our TileView
         tileView = new TileView(this);
 
 
-
-
         // Set the minimum parameters
         int zoomF = 1;
 
-        tileView.setSize(5657 * zoomF, 4000 * zoomF);
-        tileView.addDetailLevel(1f / zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg");
+        tileView.setSize(5657 * zoomF, 3913 * zoomF);
+        tileView.addDetailLevel(1f / zoomF, "tiles/groundfloor/1000/_%col%_%row%.png", "tiles/samples/groundfloor.jpg");
 
-        tileView.addDetailLevel(0.5f / zoomF, "tiles/groundfloor/500/_%col%_%row%.png", "tiles/groundfloor/groundfloor.jpg", 256, 256);
+        tileView.addDetailLevel(0.5f / zoomF, "tiles/groundfloor/500/_%col%_%row%.png", "tiles/samples/groundfloor.jpg", 256, 256);
 
         // bottom left of university 55.942584, -3.188343
         Utils.LatLon latLonM = utils.latLonToMeters(55.942584, -3.188343);
@@ -96,6 +94,14 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
                 }
             }
         });
+
+
+        Paint paint = tileView.getPathPaint();
+        paint.setShadowLayer( 4, 2, 2, 0x66000000 );
+        paint.setPathEffect(new CornerPathEffect(5));
+
+        // draw some of the points
+        tileView.drawPath(points);
 
     }
 

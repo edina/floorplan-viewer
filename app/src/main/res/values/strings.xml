@@ -6,34 +6,55 @@
 
     <string name="inital_Time">0 min, 0 sec</string>
     <string-array name="titles">
-        <item>1 Entrance</item>
-        <item>2 Reception Desk</item>
-        <!--
-        <item>3 The Exhibition Room</item>
-        <item>4 The Library Helpdesk </item>
-        <item>5 Self Issue</item>
-        <item>6 Book Return</item> !-->
+        <item>Facts About Library</item>
+        <item>Building and Historical Context</item>
+        <item>Exhibition Space</item>
+        <item>Helpdesk and Hub</item>
+        <item>Ground Floor Study Area</item>
+        <item>Signature Room</item>
+        <item>Outside Cafe/Rest of the Library</item>
     </string-array>
 
     <array name="route_list_icons" >
         <item>@drawable/image_1</item>
         <item>@drawable/image_2</item>
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_1</item>
+
     </array>
     <string-array name="locations" >
-        <item>3976,957</item>
-        <item>5120,1056</item>
+        <item>1650,2000</item>
+        <item>1650,3000</item>
+        <item>500,2900</item>
+        <item>1700,1300</item>
+        <item>4500,500</item>
+        <item>4400,1750</item>
+        <item>2950,2850</item>
     </string-array>
 
     <string-array name="descriptions">
 
-        <item>The Main Library was designed by Sir Basil Spence. It was built in 1967.  and A-listed in 2005. Major redevelopment began in 2007, and was completed in Spring 2013.</item>
-        <item>Staffed by both Library Helpdesk and Library Facilities staff. If you are visiting the library, or have lost your University card, this desk will be your first port of call.</item>
+        <item>Desc Facts About Library</item>
+        <item>Desc Building and Historical Context</item>
+        <item>Desc Exhibition Space</item>
+        <item>Desc Helpdesk and Hub</item>
+        <item>Desc Ground Floor Study Area</item>
+        <item>Desc Signature Room</item>
+        <item>Desc Outside Cafe/Rest of the Library</item>
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
     <array name="area_images" >
         <item>@drawable/image_1</item>
         <item>@drawable/image_2</item>
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_1</item>
 
     </array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>

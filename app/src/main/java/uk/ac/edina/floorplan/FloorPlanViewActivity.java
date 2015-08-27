@@ -141,7 +141,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
 
             // add it to the view tree at the same position and offset as the marker that invoked it
             int x = area.getPoint().getX(),y = area.getPoint().getY();
-            tileView.addCallout( callout, x, y, -0.5f, -1.0f );
+            tileView.addCallout( callout, x, y, -0.5f, -1.2f );
             tileView.setScale(3.0);
             tileView.slideToAndCenter(x,y);
 
@@ -163,10 +163,6 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 
 
 }

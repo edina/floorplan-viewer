@@ -55,7 +55,7 @@ public class AreaDetailVideoViewActivity extends FloorPlanBaseActivity {
 
         try {
             myVideoView.setMediaController(mediaControls);
-            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.dolly));
+            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + area.getVideoId()));
 
         } catch (Exception e) {
             Log.e("Error", e.getMessage());

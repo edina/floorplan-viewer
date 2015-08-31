@@ -1,6 +1,7 @@
 package uk.ac.edina.floorplan;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 
 /**
@@ -12,16 +13,26 @@ public abstract class FloorPlanBaseActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         floorPlanApplication = (FloorPlanApplication) this.getApplicationContext();
     }
 
     protected void onResume() {
         super.onResume();
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!bluetoothAdapter.isEnabled()) {
+            bluetoothAdapter.enable();
+        }
         floorPlanApplication.setCurrentActivity(this);
     }
 
     protected void onPause() {
         clearReferences();
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter.isEnabled()) {
+            bluetoothAdapter.disable();
+        }
         super.onPause();
     }
 

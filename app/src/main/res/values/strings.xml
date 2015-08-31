@@ -25,6 +25,17 @@
         <item>@drawable/image_1</item>
 
     </array>
+
+    <array name="video_list" >
+        <item>@raw/welcome_to_the_main_library</item>
+        <item>@raw/building_history</item>
+        <item>@raw/exhibition_gallery</item>
+        <item>@raw/help_desk_and_hub</item>
+        <item>@raw/ground_floor_study_area</item>
+        <item>@raw/signature_room</item>
+        <item>@raw/library_cafe_and_beyond</item>
+
+    </array>
     <string-array name="locations" >
         <item>1650,2000</item>
         <item>1650,3000</item>

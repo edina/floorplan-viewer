@@ -25,9 +25,11 @@ public class FloorPlanAreas {
             String[] locations = resources.getStringArray(R.array.locations);
             TypedArray icons = resources.obtainTypedArray(R.array.route_list_icons);
 
+            TypedArray videos = resources.obtainTypedArray(R.array.video_list);
+
 
             for (int i = 0; i < titles.length; i++) {
-                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i]));
+                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i],  videos.getResourceId(i, -1) ));
             }
         }
 

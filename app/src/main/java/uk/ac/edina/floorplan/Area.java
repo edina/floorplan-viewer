@@ -13,9 +13,18 @@ public class Area implements Serializable{
     private String description;
     private ImagePixelLocation point;
 
+    private int videoId;
+
+    public int getVideoId() {
+        return videoId;
+    }
+
     public int getImageId() {
         return imageId;
     }
+
+
+
 
     public String getTitle() {
         return title;
@@ -29,7 +38,7 @@ public class Area implements Serializable{
         return point;
     }
 
-    Area(String title, int imageId, String description, String locations) {
+    Area(String title, int imageId, String description, String locations, int videoId) {
         this.title = title;
         this.imageId = imageId;
         this.description = description;
@@ -37,6 +46,7 @@ public class Area implements Serializable{
         int x = Integer.valueOf(p[0]);
         int y = Integer.valueOf(p[1]);
         point = new ImagePixelLocation(x, y);
+        this.videoId = videoId;
     }
 
     @Override

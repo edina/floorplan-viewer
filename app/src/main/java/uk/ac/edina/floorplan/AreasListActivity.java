@@ -1,6 +1,5 @@
 package uk.ac.edina.floorplan;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -40,10 +39,6 @@ public class AreasListActivity extends FloorPlanBaseActivity {
 
         listView = (ListView) findViewById(R.id.areasList);
 
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (!mBluetoothAdapter.isEnabled()) {
-            mBluetoothAdapter.enable();
-        }
         // 1. Access the TextView defined in layout XML
         // and then set its text
         adapter = new MyAdapter(this);
@@ -99,16 +94,6 @@ public class AreasListActivity extends FloorPlanBaseActivity {
         outState.putSerializable(AreasListActivity.AREA_KEY, selectedRow);
     }
 
-
-
-/*
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        selectedRow = (Area)adapter.getItem(position);
-        goToMap(selectedRow);
-    }
-
-*/
 
 
     class  MyAdapter extends BaseAdapter {

@@ -52,7 +52,7 @@ public class AreaDetailView extends Activity {
         areaDetailsTitle = (TextView) findViewById(R.id.areaDetailTitle);
         areaDetailsImage = (ImageView)findViewById(R.id.areaDetailsImage);
         areaDetailsDescription = (TextView) findViewById(R.id.areaDetailsDescription);
-        mediaPlayer = MediaPlayer.create(this, R.raw.sample_song);
+        //mediaPlayer = MediaPlayer.create(this, R.raw.sample_song);
         finalTime = mediaPlayer.getDuration();
         duration = (TextView) findViewById(R.id.duration);
         seekBar = (SeekBar) findViewById(R.id.seekBar);

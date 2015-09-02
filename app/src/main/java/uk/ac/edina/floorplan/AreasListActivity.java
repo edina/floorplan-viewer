@@ -2,7 +2,9 @@ package uk.ac.edina.floorplan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by murrayking on 19/06/2015.
@@ -128,7 +131,15 @@ public class AreasListActivity extends FloorPlanBaseActivity {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = inflater.inflate(R.layout.places_row_layout, viewGroup, false);
             TextView title = (TextView) row.findViewById(R.id.textTitle);
-            TextView description = (TextView) row.findViewById(R.id.textDescription);
+
+            AssetManager am = context.getApplicationContext().getAssets();
+
+            Typeface typeface = Typeface.createFromAsset(am,
+                    String.format(Locale.ENGLISH, "fonts/%s", "SourceSansPro-Regular.ttf"));
+
+            title.setTypeface(typeface);
+
+            //TextView description = (TextView) row.findViewById(R.id.textDescription);
             ImageView imageView = (ImageView) row.findViewById(R.id.trailIcon);
             Area area = rows.get(i);
 

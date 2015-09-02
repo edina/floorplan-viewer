@@ -2,10 +2,14 @@ package uk.ac.edina.floorplan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 /**
  * Created by murrayking on 29/07/2015.
@@ -20,8 +24,15 @@ public class CalloutFactory {
         View callout = LayoutInflater.from(activity).inflate(R.layout.callout_layout, null);
 
         TextView calloutTitle = (TextView)callout.findViewById(R.id.calloutTitle);
+        AssetManager am = activity.getApplicationContext().getAssets();
+
+        Typeface typeface = Typeface.createFromAsset(am,
+                String.format(Locale.ENGLISH, "fonts/%s", "SourceSansPro-Regular.ttf"));
+
+        calloutTitle.setTypeface(typeface);
         calloutTitle.setText(area.getTitle());
         TextView calloutDescription = (TextView)callout.findViewById(R.id.calloutDescription);
+        calloutDescription.setTypeface(typeface);
         calloutDescription.setText(area.getDescription());
 
         Button detailsButton = (Button)callout.findViewById(R.id.areaDetails);

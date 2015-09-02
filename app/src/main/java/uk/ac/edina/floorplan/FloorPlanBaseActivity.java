@@ -31,7 +31,7 @@ public abstract class FloorPlanBaseActivity extends Activity {
         clearReferences();
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter.isEnabled()) {
-            bluetoothAdapter.disable();
+            //bluetoothAdapter.disable();
         }
         super.onPause();
     }

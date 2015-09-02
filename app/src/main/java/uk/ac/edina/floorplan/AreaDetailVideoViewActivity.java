@@ -41,6 +41,7 @@ public class AreaDetailVideoViewActivity extends FloorPlanBaseActivity {
         Area area = (Area)previousIntent.getSerializableExtra(AreasListActivity.AREA_KEY);
 
         TextView areaDetailsTitle = (TextView) findViewById(R.id.areaDetailVideoTitle);
+        areaDetailsTitle.setText(area.getTitle());
 
         // Create a progressbar
         progressDialog = new ProgressDialog(AreaDetailVideoViewActivity.this);

@@ -133,7 +133,7 @@ public class AreasListActivity extends FloorPlanBaseActivity {
             Area area = rows.get(i);
 
             title.setText(area.getTitle());
-            description.setText(area.getDescription());
+            //description.setText(area.getDescription());
             imageView.setImageResource(area.getImageId());
             return row;
         }

@@ -37,7 +37,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
 
         Intent previousIntent = getIntent();
 
-        Area area = (Area)previousIntent.getSerializableExtra(AreasListActivity.AREA_KEY);
+        final Area area = (Area)previousIntent.getSerializableExtra(AreasListActivity.AREA_KEY);
 
 
         // Create our TileView
@@ -86,6 +86,10 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
             @Override
             public void onGlobalLayout() {
                 tileView.slideToAndCenter(x, y);
+                CalloutFactory calloutFactory = new CalloutFactory();
+                View callout = calloutFactory.createCallout(FloorPlanViewActivity.this, area);
+
+                tileView.addCallout(callout, x, y, -0.5f, -1.2f);
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     tileView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 

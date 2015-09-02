@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text sfasdfj asfasf safasf asfasf asfasdf sdf"
+        android:text=""
         android:id="@+id/textDescription"
         android:layout_below="@+id/trailIcon"
         android:layout_alignLeft="@+id/textTitle"

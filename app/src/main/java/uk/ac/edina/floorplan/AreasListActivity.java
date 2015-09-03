@@ -34,11 +34,19 @@ public class AreasListActivity extends FloorPlanBaseActivity {
 
     MyAdapter adapter;
     private ListView listView;
+    private Typeface typeface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_view);
+        AssetManager am = this.getApplicationContext().getAssets();
+
+        typeface = Typeface.createFromAsset(am,
+                String.format(Locale.ENGLISH, "fonts/%s", "SourceSansPro-Regular.ttf"));
+
+        TextView mainTitle = (TextView) findViewById(R.id.mainTitle);
+        mainTitle.setTypeface(typeface);
 
         listView = (ListView) findViewById(R.id.areasList);
 
@@ -131,20 +139,17 @@ public class AreasListActivity extends FloorPlanBaseActivity {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = inflater.inflate(R.layout.places_row_layout, viewGroup, false);
             TextView title = (TextView) row.findViewById(R.id.textTitle);
+            TextView description = (TextView) row.findViewById(R.id.textDescription);
 
-            AssetManager am = context.getApplicationContext().getAssets();
-
-            Typeface typeface = Typeface.createFromAsset(am,
-                    String.format(Locale.ENGLISH, "fonts/%s", "SourceSansPro-Regular.ttf"));
 
             title.setTypeface(typeface);
+            description.setTypeface(typeface);
 
-            //TextView description = (TextView) row.findViewById(R.id.textDescription);
-            ImageView imageView = (ImageView) row.findViewById(R.id.trailIcon);
+            ImageView imageView = (ImageView) row.findViewById(R.id.areaIcon);
             Area area = rows.get(i);
 
             title.setText(area.getTitle());
-            //description.setText(area.getDescription());
+            description.setText(area.getDescription());
             imageView.setImageResource(area.getImageId());
             return row;
         }

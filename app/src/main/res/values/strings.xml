@@ -6,23 +6,23 @@
 
     <string name="inital_Time">0 min, 0 sec</string>
     <string-array name="titles">
-        <item>Facts About Library</item>
-        <item>Building and Historical Context</item>
-        <item>Exhibition Space</item>
-        <item>Helpdesk and Hub</item>
+        <item>Welcome to the Main Library</item>
+        <item>Building History</item>
+        <item>Exhibition Gallery</item>
+        <item>Help Desk and HUB</item>
         <item>Ground Floor Study Area</item>
         <item>Signature Room</item>
-        <item>Outside Cafe/Rest of the Library</item>
+        <item>Library Cafe and Beyond</item>
     </string-array>
 
     <array name="route_list_icons" >
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_1</item>
+        <item>@drawable/welcome_to_the_main_library_crop</item>
+        <item>@drawable/building_history_crop</item>
+        <item>@drawable/exhibition_gallery_crop</item>
+        <item>@drawable/helpdesk_and_hub_crop</item>
+        <item>@drawable/ground_floor_study_area_crop</item>
+        <item>@drawable/signature_room_crop</item>
+        <item>@drawable/library_cafe_and_beyond_crop</item>
 
     </array>
 
@@ -48,24 +48,24 @@
 
     <string-array name="descriptions">
 
-        <item>Desc Facts About Library</item>
-        <item>Desc Building and Historical Context</item>
-        <item>Desc Exhibition Space</item>
-        <item>Desc Helpdesk and Hub</item>
-        <item>Desc Ground Floor Study Area</item>
-        <item>Desc Signature Room</item>
-        <item>Desc Outside Cafe/Rest of the Library</item>
+        <item>Largest library on campus</item>
+        <item>1960s to the present day</item>
+        <item>Engage with our collections</item>
+        <item>Any question answered</item>
+        <item>Diverse study space</item>
+        <item>Study with the greats</item>
+        <item>Continue your tour</item>
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
     <array name="area_images" >
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_1</item>
+        <item>@raw/welcome_to_the_main_library</item>
+        <item>@raw/building_history</item>
+        <item>@raw/exhibition_gallery</item>
+        <item>@raw/help_desk_and_hub</item>
+        <item>@raw/ground_floor_study_area</item>
+        <item>@raw/signature_room</item>
+        <item>@raw/library_cafe_and_beyond</item>
 
     </array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>

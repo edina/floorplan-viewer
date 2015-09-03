@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold"
+
         android:text="Main Library Tour"
         android:textColor="@color/White"
         android:background="@color/UniRedBackGround"

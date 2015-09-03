@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -31,9 +32,8 @@ public class CalloutFactory {
 
         calloutTitle.setTypeface(typeface);
         calloutTitle.setText(area.getTitle());
-        TextView calloutDescription = (TextView)callout.findViewById(R.id.calloutDescription);
-        calloutDescription.setTypeface(typeface);
-        calloutDescription.setText(area.getDescription());
+        ImageView calloutDescription = (ImageView)callout.findViewById(R.id.calloutIcon);
+        calloutDescription.setImageResource(area.getImageId());
 
         Button detailsButton = (Button)callout.findViewById(R.id.areaDetails);
         detailsButton.setOnClickListener(new View.OnClickListener() {

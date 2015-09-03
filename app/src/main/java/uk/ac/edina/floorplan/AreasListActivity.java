@@ -23,8 +23,6 @@ import java.util.Locale;
  */
 public class AreasListActivity extends FloorPlanBaseActivity {
 
-
-
     public static final String AREA_KEY = "AREA_KEY";
 
 
@@ -35,6 +33,7 @@ public class AreasListActivity extends FloorPlanBaseActivity {
     MyAdapter adapter;
     private ListView listView;
     private Typeface typeface;
+    private Typeface typefaceBold;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,9 +43,10 @@ public class AreasListActivity extends FloorPlanBaseActivity {
 
         typeface = Typeface.createFromAsset(am,
                 String.format(Locale.ENGLISH, "fonts/%s", "SourceSansPro-Regular.ttf"));
-
+        typefaceBold = Typeface.createFromAsset(am,
+                String.format(Locale.ENGLISH, "fonts/%s", "SourceSansPro-Bold.ttf"));
         TextView mainTitle = (TextView) findViewById(R.id.mainTitle);
-        mainTitle.setTypeface(typeface);
+        mainTitle.setTypeface(typefaceBold);
 
         listView = (ListView) findViewById(R.id.areasList);
 

@@ -85,7 +85,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
         tileView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                tileView.slideToAndCenter(x, y);
+                tileView.slideToAndCenter(x, y, 5000);
                 CalloutFactory calloutFactory = new CalloutFactory();
                 View callout = calloutFactory.createCallout(FloorPlanViewActivity.this, area);
 
@@ -147,7 +147,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
             int x = area.getPoint().getX(),y = area.getPoint().getY();
             tileView.addCallout( callout, x, y, -0.5f, -1.2f );
             tileView.setScale(3.0);
-            tileView.slideToAndCenter(x,y);
+            tileView.slideToAndCenter(x,y, 5000);
 
         }
     };

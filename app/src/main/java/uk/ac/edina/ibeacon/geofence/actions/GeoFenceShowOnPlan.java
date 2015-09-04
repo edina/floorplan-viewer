@@ -36,7 +36,7 @@ public class GeoFenceShowOnPlan implements GeoFenceAction {
 
                 floorPlan.addCallout( callout, x, y, -0.5f, -1.0f );
 
-                floorPlan.slideToAndCenter(x,y);
+                floorPlan.slideToAndCenter(x,y, 5000);
 
 
             }

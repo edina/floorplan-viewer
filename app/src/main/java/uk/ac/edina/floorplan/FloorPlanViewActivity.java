@@ -147,7 +147,8 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
             int x = area.getPoint().getX(),y = area.getPoint().getY();
             tileView.addCallout( callout, x, y, -0.5f, -1.2f );
             tileView.setScale(3.0);
-            tileView.slideToAndCenter(x,y, 5000);
+            tileView.slideToAndCenter(x,y, 5000
+            );
 
         }
     };

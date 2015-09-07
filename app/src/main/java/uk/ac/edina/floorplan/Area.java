@@ -1,6 +1,8 @@
 package uk.ac.edina.floorplan;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by murrayking on 22/07/2015.
@@ -13,7 +15,13 @@ public class Area implements Serializable{
     private String description;
     private ImagePixelLocation point;
 
+    public List<double[]> getBboxPoints() {
+        return bboxPoints;
+    }
+
+    List<double[]> bboxPoints;
     private int videoId;
+
 
     public int getVideoId() {
         return videoId;
@@ -38,7 +46,7 @@ public class Area implements Serializable{
         return point;
     }
 
-    Area(String title, int imageId, String description, String locations, int videoId) {
+    Area(String title, int imageId, String description, String locations, int videoId, String bbox) {
         this.title = title;
         this.imageId = imageId;
         this.description = description;
@@ -47,7 +55,25 @@ public class Area implements Serializable{
         int y = Integer.valueOf(p[1]);
         point = new ImagePixelLocation(x, y);
         this.videoId = videoId;
+        this.bboxPoints = parseBBox(bbox);
     }
+
+
+    private List<double[]>  parseBBox(String bbox){
+        ArrayList<double[]> bboxPoints = new ArrayList<>();
+
+        String[] points = bbox.split(";");
+        for(String coordinates : points){
+
+           String[] coords =  coordinates.split(",");
+
+            bboxPoints.add(new double[]{ Double.valueOf(coords[0]), Double.valueOf(coords[1])});
+
+        }
+
+        return bboxPoints;
+
+    };
 
     @Override
     public boolean equals(Object o) {

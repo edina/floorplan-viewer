@@ -1,6 +1,7 @@
 package uk.ac.edina.floorplan;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -22,14 +23,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
     private TileView tileView;
     private Utils utils = new Utils();
 
-    private ArrayList<double[]> points = new ArrayList<>();
-    {
-        points.add( new double[] { 1000, 1000 } );
-        points.add( new double[] { 2000, 1000 } );
-        points.add( new double[] { 2000, 2000 } );
-        points.add( new double[] { 1000, 2000 } );
-        points.add( new double[] { 1000, 1000 } );
-    }
+
 
     @Override
      public void onCreate(Bundle savedInstanceState){
@@ -77,7 +71,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
 
 
         //setContentView(R.layout.activity_main);
-        setContentView( tileView );
+        setContentView(tileView);
 
 
 
@@ -103,9 +97,9 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
         Paint paint = tileView.getPathPaint();
         paint.setShadowLayer( 4, 2, 2, 0x66000000 );
         paint.setPathEffect(new CornerPathEffect(5));
-
+        paint.setColor(Color.RED);
         // draw some of the points
-        tileView.drawPath(points);
+        tileView.drawPath(area.getBboxPoints());
 
     }
 

@@ -39,6 +39,5 @@ dependencies {
     compile 'com.jakewharton:disklrucache:2.0.2'
     testCompile 'junit:junit:4.12'
     compile files('libs/tileviewlib-1.0.14.jar')
-
     compile 'org.altbeacon:android-beacon-library:2+@aar'
 }

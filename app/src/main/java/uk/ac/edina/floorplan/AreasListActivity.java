@@ -27,10 +27,8 @@ public class AreasListActivity extends FloorPlanBaseActivity {
 
 
     // Currently selected item in the ListView
-    Area selectedRow;
-
-
-    MyAdapter adapter;
+    private Area selectedRow;
+    private MyAdapter adapter;
     private ListView listView;
     private Typeface typeface;
     private Typeface typefaceBold;

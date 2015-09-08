@@ -1,0 +1,60 @@
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/UniBlueBackground"
+        android:orientation="vertical"
+    tools:context="uk.ac.edina.floorplan.splash">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" android:background="@color/UniBlueBackground">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/uni_logo"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:background="@drawable/round">
+
+                <TextView android:text="Main Library Tour" android:layout_width="match_parent" android:id="@+id/splashTitle"
+                    android:layout_height="wrap_content" android:textSize="32sp"
+                    android:textColor="@color/White"
+                    android:gravity="center_horizontal" />
+
+                <TextView android:text="Doors Open Day 2015" android:layout_width="match_parent" android:id="@+id/splashSubtitle"
+                    android:layout_height="wrap_content" android:textSize="32sp"
+                    android:textColor="@color/White"
+                    android:gravity="center_horizontal" />
+
+            </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@color/UniBlueBackground">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/splash"
+                android:padding="6dp"
+                />
+
+            </LinearLayout>
+    </LinearLayout>

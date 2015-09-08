@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -13,7 +14,7 @@ import java.util.Locale;
 public class Splash extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 10000;
+    private final int SPLASH_DISPLAY_LENGTH = 20000;
 
     /** Called when the activity is first created. */
     @Override
@@ -31,16 +32,29 @@ public class Splash extends Activity {
         TextView splashSubtitle = (TextView)this.findViewById(R.id.splashSubtitle);
         splashSubtitle.setTypeface(typefaceRegular);
 
+
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(Splash.this,AreasListActivity.class);
-                Splash.this.startActivity(mainIntent);
-                Splash.this.finish();
+                gotToMainMenu();
             }
         }, SPLASH_DISPLAY_LENGTH);
+    }
+
+    private void gotToMainMenu() {
+        Intent mainIntent = new Intent(Splash.this,AreasListActivity.class);
+        Splash.this.startActivity(mainIntent);
+        Splash.this.finish();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        gotToMainMenu();
+        return true;
+
     }
 }

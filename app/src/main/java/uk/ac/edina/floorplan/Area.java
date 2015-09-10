@@ -10,18 +10,34 @@ import java.util.List;
 public class Area implements Serializable{
 
 
+    List<double[]> bboxPoints;
     private String title;
     private int imageId;
     private String description;
     private ImagePixelLocation point;
+    private String beaconId;
+    private int videoId;
+
+    Area(String title, int imageId, String description, String locations, int videoId, String bbox, String beaconId) {
+        this.title = title;
+        this.imageId = imageId;
+        this.description = description;
+        String[] p = locations.split(",");
+        int x = Integer.valueOf(p[0]);
+        int y = Integer.valueOf(p[1]);
+        point = new ImagePixelLocation(x, y);
+        this.videoId = videoId;
+        this.bboxPoints = parseBBox(bbox);
+        this.beaconId = beaconId;
+    }
+
+    public String getBeaconId() {
+        return beaconId;
+    }
 
     public List<double[]> getBboxPoints() {
         return bboxPoints;
     }
-
-    List<double[]> bboxPoints;
-    private int videoId;
-
 
     public int getVideoId() {
         return videoId;
@@ -30,9 +46,6 @@ public class Area implements Serializable{
     public int getImageId() {
         return imageId;
     }
-
-
-
 
     public String getTitle() {
         return title;
@@ -46,20 +59,7 @@ public class Area implements Serializable{
         return point;
     }
 
-    Area(String title, int imageId, String description, String locations, int videoId, String bbox) {
-        this.title = title;
-        this.imageId = imageId;
-        this.description = description;
-        String[] p = locations.split(",");
-        int x = Integer.valueOf(p[0]);
-        int y = Integer.valueOf(p[1]);
-        point = new ImagePixelLocation(x, y);
-        this.videoId = videoId;
-        this.bboxPoints = parseBBox(bbox);
-    }
-
-
-    private List<double[]>  parseBBox(String bbox){
+private List<double[]>  parseBBox(String bbox){
         ArrayList<double[]> bboxPoints = new ArrayList<>();
 
         String[] points = bbox.split(";");

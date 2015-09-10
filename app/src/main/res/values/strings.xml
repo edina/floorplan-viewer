@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FPlan</string>
+    <string name="app_name">Library Tour</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -13,6 +13,16 @@
         <item>Ground Floor Study Area</item>
         <item>Signature Room</item>
         <item>Library Cafe and Beyond</item>
+    </string-array>
+
+    <string-array name="beaconMappings">
+        <item>24125</item>
+        <item>15877</item>
+        <item>58026</item>
+        <item>11097</item>
+        <item>36696</item>
+        <item>59317</item>
+        <item>27600</item>
     </string-array>
 
     <array name="route_list_icons" >
@@ -82,6 +92,5 @@
 
     </array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
-    <string name="title_floor_plan">Floor Plan</string>
-    <string name="title_activity_splash">splash</string>
+    <string name="title_floor_plan">Library Tour</string>
 </resources>

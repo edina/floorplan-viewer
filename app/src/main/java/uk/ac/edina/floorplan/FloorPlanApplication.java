@@ -117,64 +117,15 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
 
     private void addGeoFences() {
         List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
+        beaconGeoFences.clear();
+        for(Area a : areas){
+            String enterRegionNotificationText = String.format("Entering region %s", a.getTitle());
+            String leavingRegionNotificationText = String.format("Leaving region %s", a.getTitle());
+            GeoFenceAction action = new GeoFenceDebugAction( this, areas.get(0) , enterRegionNotificationText,  leavingRegionNotificationText );
+            BeaconGeoFence beaconGeoFence = new BeaconGeoFence(5, a.getBeaconId(), action);
+            beaconGeoFences.add(beaconGeoFence);
 
-        GeoFenceAction alertDialogAction = new GeoFenceDebugAction(this, areas.get(0) , "Enter Message", "Leave Message");
-        String printerHelpUrl = "http://www8.hp.com/uk/en/home.html";
-        //GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);
-
-        String lightBlueBeaconMinorId = "59317";
-        String purpleBeaconMinorId = "24489";
-
-
-
-        //GeoFenceAction exhibitionRoom = new GeoFenceShowOnPlan(areas.get(0), this.tileView, this);
-
-        //BeaconGeoFence blueBeaconShowSampleAlert = new BeaconGeoFence(5, purpleBeaconMinorId, exhibitionRoom);
-
-        //GeoFenceAction debug27600 = new GeoFenceDebugAction(this, areas.get(2) , "Enter Icy Marshmallow 27600", "Leave Icy Marshmallow 27600" );
-
-        GeoFenceAction debug59317 = new GeoFenceDebugAction( this, areas.get(0) ,"Enter Icy Marshmallow 59317", "Leave Icy Marshmallow 59317" );
-        GeoFenceAction debug43808 = new GeoFenceDebugAction( this, areas.get(2) ,"Enter Exhibition Space 43808", "Leave Exhibition Space 43808");
-
-
-       // BeaconGeoFence icyMarshmallow27600 = new BeaconGeoFence(5, "27600", debug27600);
-
-
-        BeaconGeoFence icyMarshmallow59317 = new BeaconGeoFence(5, "59317", debug59317);
-
-
-        BeaconGeoFence mintCocktail43808 = new BeaconGeoFence(5, "43808", debug43808);
-
-        //beaconGeoFences.add(blueBeaconShowSampleAlert);
-
-
-        //beaconGeoFences.add(icyMarshmallow27600);
-        beaconGeoFences.add(mintCocktail43808);
-        beaconGeoFences.add(icyMarshmallow59317);
-
-
-        /*GeoFenceAction highlightEdinaMeetingRoom = new GeoFenceHighLightRegionAction(MainMapView.this, mapView);
-        GeoFenceAction geoFenceAudioAction = new GeoFenceAudioAction(MainMapView.this, "chime.mp3");
-        GeoFenceAction geoFenceAudioAction2 = new GeoFenceAudioAction(MainMapView.this, "notificationdetect.mp3");
-        GeoFenceAction alertDialogWelcome = new GeoFenceAlertDialogAction(MainMapView.this, "Welcome to EDINA", "Don't forget to leave FOB at reception!");
-        GeoFenceAction alertDialogPrinter = new GeoFenceAlertDialogAction(MainMapView.this, "Printer CSCH2a", "Bye bye Printer");
-        String printerHelpUrl = "http://www.okidata.com/printers/color/c830";
-        GeoFenceAction showPrinterPage = new GeoFenceWebAction(MainMapView.this, printerHelpUrl);*/
-        String blueberryBeaconMinorId = "24489";
-        String mintBeaconMinorId = "11097";
-
-        /*BeaconGeoFence blueBeaconHighlightMeetingRoom = new BeaconGeoFence(1.5,lightBlueBeaconMinorId, highlightEdinaMeetingRoom);
-        BeaconGeoFence blueberryBeaconPrinter = new BeaconGeoFence(1.5,blueberryBeaconMinorId, alertDialogPrinter);
-        BeaconGeoFence mintBeaconAlert = new BeaconGeoFence(1.5,mintBeaconMinorId, alertDialogWelcome);
-        BeaconGeoFence blueBeaconAudioAction = new BeaconGeoFence(1.5,lightBlueBeaconMinorId, geoFenceAudioAction2);
-        BeaconGeoFence mintBeaconAudioAction = new BeaconGeoFence(1.5,mintBeaconMinorId, geoFenceAudioAction);
-        BeaconGeoFence blueberryBeaconAudioAction = new BeaconGeoFence(1.5,blueberryBeaconMinorId, geoFenceAudioAction2);
-        beaconGeoFences.add(blueberryBeaconPrinter) ;
-        beaconGeoFences.add(blueBeaconHighlightMeetingRoom) ;
-        beaconGeoFences.add(blueBeaconAudioAction) ;
-        beaconGeoFences.add(blueberryBeaconAudioAction) ;
-        beaconGeoFences.add(mintBeaconAudioAction) ;
-        beaconGeoFences.add(mintBeaconAlert) ;*/
+        }
 
     }
 

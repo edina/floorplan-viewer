@@ -28,11 +28,11 @@ mkdir -p "$tilesfolder/$basename/125"
 mkdir -p "$samplesfolder"
 
 echo "create half-sized versions for tiling will be discarded later"
-sleep 5
-$imagemagick $filename -resize 50%  $basename-500.$extension
-sleep 5
+sleep 20
+#$imagemagick $filename -resize 50%  $basename-500.$extension
+sleep 20
 $imagemagick $filename -resize 25%  $basename-250.$extension
-sleep 5
+sleep 20
 $imagemagick $filename -resize 12.5%  $basename-125.$extension
 
 echo create sample

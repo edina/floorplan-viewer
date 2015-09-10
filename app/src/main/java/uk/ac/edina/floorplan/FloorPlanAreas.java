@@ -22,6 +22,7 @@ public class FloorPlanAreas {
             String[] titles = resources.getStringArray(R.array.titles);
             String[] descriptions = resources.getStringArray(R.array.descriptions);
             String[] bbox = resources.getStringArray(R.array.bounding_areas);
+            String[] beaconIdMappings = resources.getStringArray(R.array.beaconMappings);
 
             String[] locations = resources.getStringArray(R.array.locations);
             TypedArray icons = resources.obtainTypedArray(R.array.route_list_icons);
@@ -30,7 +31,7 @@ public class FloorPlanAreas {
 
 
             for (int i = 0; i < titles.length; i++) {
-                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i],  videos.getResourceId(i, -1), bbox[i] ));
+                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i],  videos.getResourceId(i, -1), bbox[i], beaconIdMappings[i] ));
             }
         }
 

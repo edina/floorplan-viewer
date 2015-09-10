@@ -46,10 +46,10 @@ public class GeoFenceDebugAction  implements GeoFenceAction {
 
                 @Override
                 public void run() {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(currentActivity);
-                    builder1.setMessage(enterMessage);
-                    builder1.setCancelable(true);
-                    builder1.setPositiveButton("Ok",
+                    AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity);
+                    builder.setMessage(enterMessage);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
@@ -65,7 +65,7 @@ public class GeoFenceDebugAction  implements GeoFenceAction {
                             });
 
 
-                    AlertDialog alert11 = builder1.create();
+                    AlertDialog alert11 = builder.create();
                     alert11.show();
                 }
             });

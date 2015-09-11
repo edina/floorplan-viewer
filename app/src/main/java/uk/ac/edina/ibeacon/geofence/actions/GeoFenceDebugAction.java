@@ -81,6 +81,34 @@ public class GeoFenceDebugAction  implements GeoFenceAction {
 
     @Override
     public void onLeave() {
-        showLog(leaveMessage);
+        final FloorPlanBaseActivity currentActivity = context.getCurrentActivity();
+        //&& currentActivity.acceptBeaconNotifications()
+
+        if(currentActivity != null ) {
+
+            //add an alert here
+            currentActivity.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity);
+                    builder.setMessage(leaveMessage);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+
+                                }
+                            });
+
+
+                    AlertDialog alert11 = builder.create();
+                    alert11.show();
+                }
+            });
+
+
+        }
     }
 }

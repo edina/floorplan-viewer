@@ -19,6 +19,7 @@ import java.util.List;
 
 import uk.ac.edina.ibeacon.geofence.BeaconGeoFence;
 import uk.ac.edina.ibeacon.geofence.BeaconWrapper;
+import uk.ac.edina.ibeacon.geofence.IBeacon;
 import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAction;
 import uk.ac.edina.ibeacon.geofence.actions.GeoFenceDebugAction;
 
@@ -35,10 +36,11 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
 
     private FloorPlanBaseActivity currentActivity;
 
-    public FloorPlanBaseActivity getCurrentActivity(){
+    public FloorPlanBaseActivity getCurrentActivity() {
         return currentActivity;
     }
-    public void setCurrentActivity(FloorPlanBaseActivity currentActivity){
+
+    public void setCurrentActivity(FloorPlanBaseActivity currentActivity) {
         this.currentActivity = currentActivity;
     }
 
@@ -58,41 +60,73 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
 
     @Override
     public void onBeaconServiceConnect() {
+        final List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                if (beacons.size() > 0) {
 
-                    for (Beacon beacon : beacons) {
+                List<Beacon> sortedBeaconsByDistance = new ArrayList<>(beacons);
 
-                        for (final BeaconGeoFence geoFence : beaconGeoFences) {
+                Collections.sort(sortedBeaconsByDistance, new Comparator<Beacon>() {
+                    @Override
+                    public int compare(Beacon beacon, Beacon beacon2) {
+                        double test = beacon.getDistance() - beacon2.getDistance();
+                        return (int) Math.round(test * 1000);
+                    }
+                });
 
-                            geoFence.evaluateGeofence(new BeaconWrapper(beacon));
+                Beacon beaconToTest = null;
 
-                            Log.d(TAG, beacon.toString());
-
-
+                for (int i = 0; i < sortedBeaconsByDistance.size(); i++) {
+                    Beacon b = sortedBeaconsByDistance.get(i);
+                    IBeacon bWrapper = new BeaconWrapper(b);
+                    String title = "Not Edina";
+                    for (Area a : areas) {
+                        if (a.getBeaconId().equals(bWrapper.getMinorId())) {
+                            title = a.getTitle();
                         }
                     }
-
-                    /**************************** debug to display *******************/
-
-                    final StringBuilder debug = new StringBuilder();
-
-                    List<Beacon> sortedBeaconsByDistance = new ArrayList<>(beacons);
-
-                    Collections.sort(sortedBeaconsByDistance, new Comparator<Beacon>() {
-                        @Override
-                        public int compare(Beacon beacon, Beacon beacon2) {
-                            double test = beacon.getDistance() - beacon2.getDistance();
-                            return (int) Math.round(test * 100);
-                        }
-                    });
-
-
-                    for (Beacon b : sortedBeaconsByDistance) {
-                        debug.append(b.getId3()).append(": dis : ").append(b.getDistance()).append("\n");
+                    //
+                    if (i == 0) {
+                        beaconToTest = b;
+                        Log.d("Ranging1", "--------------------- Testing For--------------- ");
+                        Log.d("Ranging1", "XXXXXXX  Beacon XXXXXX " + title + " Id " + bWrapper.getMinorId() + " Distance " + bWrapper.getDistance() +
+                                " Signal Strength " + bWrapper.getRssi() + " Tx Power " + bWrapper.getTxPower());
+                    } else {
+                        Log.d("Ranging1", "--------------------- Ignoring --------------- ");
+                        Log.d("Ranging1", "XXXXXXX  Beacon XXXXXX " + title + " Id " + bWrapper.getMinorId() + " Distance " + bWrapper.getDistance() +
+                                " Signal Strength " + bWrapper.getRssi() + " Tx Power " + bWrapper.getTxPower());
                     }
+                }
+
+                if (beaconToTest != null) {
+
+
+                    // Log.d(TAG, beacon.toString());
+                    IBeacon bWrapper = new BeaconWrapper(beaconToTest);
+                    boolean coloredBeaconsDebug = false;
+
+                    //find area details
+                    String title = "Not Edina";
+                    for (Area a : areas) {
+                        if (a.getBeaconId().equals(bWrapper.getMinorId())) {
+                            title = a.getTitle();
+                        }
+                    }
+                    //Log.d("Ranging1", "XXXXXXX Beacon XXXXXX " + title +  " Id " + bWrapper.getMinorId() +" Distance " + bWrapper.getDistance() +
+                    //    " Signal Strength " + bWrapper.getRssi() + " Tx Power " + bWrapper.getTxPower() );
+
+                    for (final BeaconGeoFence geoFence : beaconGeoFences) {
+
+                        geoFence.evaluateGeofence(bWrapper);
+
+                    }
+                }
+
+
+                /**************************** debug to display *******************/
+
+
                     /*MainMapView.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -101,8 +135,8 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
                     });*/
 
 
-                    /**************************** end debug to display *******************/
-                }
+                /**************************** end debug to display *******************/
+
             }
         });
 
@@ -114,21 +148,19 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
     }
 
 
-
     private void addGeoFences() {
         List<Area> areas = FloorPlanAreas.getAreas(this.getResources());
         beaconGeoFences.clear();
-        for(Area a : areas){
+        for (Area a : areas) {
             String enterRegionNotificationText = String.format("Entering region %s", a.getTitle());
             String leavingRegionNotificationText = String.format("Leaving region %s", a.getTitle());
-            GeoFenceAction action = new GeoFenceDebugAction( this, areas.get(0) , enterRegionNotificationText,  leavingRegionNotificationText );
-            BeaconGeoFence beaconGeoFence = new BeaconGeoFence(5, a.getBeaconId(), action);
+            GeoFenceAction action = new GeoFenceDebugAction(this, a, enterRegionNotificationText, leavingRegionNotificationText);
+            BeaconGeoFence beaconGeoFence = new BeaconGeoFence(3.0, a.getBeaconId(), action);
             beaconGeoFences.add(beaconGeoFence);
 
         }
 
     }
-
 
 
 }

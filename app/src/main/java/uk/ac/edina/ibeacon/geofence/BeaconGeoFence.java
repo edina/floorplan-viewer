@@ -52,6 +52,7 @@ public class BeaconGeoFence  {
 
         double distance = distanceCalculator.getDistance(beacon);
 
+
         currentState.evaluateGeofence(beacon.getMinorId(), distance);
     }
 

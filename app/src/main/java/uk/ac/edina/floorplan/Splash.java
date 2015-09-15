@@ -14,7 +14,8 @@ import java.util.Locale;
 public class Splash extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 20000;
+    private final int SPLASH_DISPLAY_LENGTH = 10000;
+    public static boolean SPLASH_TIMER_SET = false ;
 
     /** Called when the activity is first created. */
     @Override
@@ -32,14 +33,17 @@ public class Splash extends Activity {
         TextView splashSubtitle = (TextView)this.findViewById(R.id.splashSubtitle);
         splashSubtitle.setTypeface(typefaceRegular);
 
-
+        SPLASH_TIMER_SET = true ;
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                gotToMainMenu();
+                if(SPLASH_TIMER_SET) {
+                    gotToMainMenu();
+                }
+
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,14 @@ public class AreasListActivity extends FloorPlanBaseActivity {
             }
 
         });
+
+        // prevent timer reset
+        uk.ac.edina.floorplan.Splash.SPLASH_TIMER_SET = false ;
+
+        // send message to reset all beacons to outside state
+        Intent beaconGeofenceResetIntent = new Intent() ;
+        beaconGeofenceResetIntent.setAction("RESET") ;
+        LocalBroadcastManager.getInstance(this).sendBroadcast(beaconGeofenceResetIntent) ;
 
     }
 

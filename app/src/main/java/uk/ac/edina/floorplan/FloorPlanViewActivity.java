@@ -55,7 +55,7 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
         // Add the view to display it
         tileView.setCacheEnabled(true);
         tileView.setTransitionsEnabled(false);
-        tileView.setScale(2.0);
+        tileView.setScale(0.5);
         final int x = area.getPoint().getX();
         final int y = area.getPoint().getY();
 

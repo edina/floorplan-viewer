@@ -3,6 +3,7 @@ package uk.ac.edina.ibeacon.geofence.actions;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 
 /**
  * Created by murray on 15/10/14.
@@ -12,6 +13,7 @@ public class GeoFenceAlertDialogAction implements GeoFenceAction {
     private  String enterMessage;
     private String leaveMessage;
     private final Activity activity;
+    private final String LOG_TAG = "GeoFenceAlertDialogAction" ;
 
     public GeoFenceAlertDialogAction(Activity activity, String enterMessage, String leaveMessage){
         this.activity = activity;
@@ -48,6 +50,7 @@ public class GeoFenceAlertDialogAction implements GeoFenceAction {
 
         @Override
     public void onLeave() {
-            showDialog(leaveMessage);
+            //showDialog(leaveMessage);
+            Log.d(LOG_TAG, leaveMessage) ;
     }
 }

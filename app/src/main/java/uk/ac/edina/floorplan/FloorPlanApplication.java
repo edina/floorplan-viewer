@@ -30,6 +30,7 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
 
     private static final String TAG = "Ranging";
     private static final String BEACON_LAYOUT_FOR_ESTIMOTE = "m:0-3=4c000215,i:4-19,i:20-21,i:22-23,p:24-24";
+    public static final double MAX_BEACON_RANGE = 6.0 ;
     private BeaconManager beaconManager;
 
     private List<BeaconGeoFence> beaconGeoFences = new ArrayList<>();
@@ -157,7 +158,7 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
             String enterRegionNotificationText = String.format("Entering zone %s", a.getTitle());
             String leavingRegionNotificationText = String.format("Leaving zone %s", a.getTitle());
             GeoFenceAction action = new GeoFenceDebugAction(this, a, enterRegionNotificationText, leavingRegionNotificationText);
-            BeaconGeoFence beaconGeoFence = new BeaconGeoFence(3.0, a.getBeaconId(), action, this);
+            BeaconGeoFence beaconGeoFence = new BeaconGeoFence(MAX_BEACON_RANGE, a.getBeaconId(), action, this);
             beaconGeoFences.add(beaconGeoFence);
 
         }

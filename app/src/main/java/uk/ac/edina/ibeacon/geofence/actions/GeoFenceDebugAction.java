@@ -20,6 +20,7 @@ public class GeoFenceDebugAction  implements GeoFenceAction {
     private String leaveMessage;
     private FloorPlanApplication context;
     private Area area;
+    private final String LOG_TAG = "GeoFenceDebugAction" ;
 
     public GeoFenceDebugAction(FloorPlanApplication context, Area area, String enterMessage, String leaveMessage) {
 
@@ -102,9 +103,10 @@ public class GeoFenceDebugAction  implements GeoFenceAction {
                                 }
                             });
 
+                    Log.d(LOG_TAG,leaveMessage) ;
 
-                    AlertDialog alert11 = builder.create();
-                    alert11.show();
+                   // AlertDialog alert11 = builder.create();
+                  //  alert11.show();
                 }
             });
 

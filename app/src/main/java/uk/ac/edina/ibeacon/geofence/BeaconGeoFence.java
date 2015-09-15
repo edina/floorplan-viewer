@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import uk.ac.edina.floorplan.FloorPlanApplication;
 import uk.ac.edina.ibeacon.geofence.actions.GeoFenceAction;
 import uk.ac.edina.ibeacon.geofence.distancecalc.DefaultDistanceCalculator;
 import uk.ac.edina.ibeacon.geofence.distancecalc.DistanceCalculator;
@@ -150,12 +151,12 @@ public class BeaconGeoFence extends BroadcastReceiver {
                     " received STAY_OUTSIDE intent from beacon " + beaconId ) ;
 
 
-            if(this.radius < 2.6) {
-                this.radius = this.radius + 0.4;
+            if(this.radius < (FloorPlanApplication.MAX_BEACON_RANGE - (FloorPlanApplication.MAX_BEACON_RANGE*0.6)) ){
+                this.radius = this.radius + (FloorPlanApplication.MAX_BEACON_RANGE*0.6);
             }
-            else if(this.radius < 3.0)
+            else if(this.radius < FloorPlanApplication.MAX_BEACON_RANGE)
             {
-                this.radius = 3.0 ;
+                this.radius = FloorPlanApplication.MAX_BEACON_RANGE ;
             }
         }else if("STAY_INSIDE".equals(action)) {
             String beaconId = intent.getStringExtra("BEACON_ID");

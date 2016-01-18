@@ -4,8 +4,8 @@ echo should already have original image in folder, as well as folders named tile
 
 
  
-basename=groundfloor
-filename=groundfloor.jpg
+basename=floorplan
+filename=floorplan.jpg
 extension=jpg
 outextension=png
 
@@ -37,7 +37,7 @@ $imagemagick $filename -resize 12.5%  $basename-125.$extension
 
 echo create sample
 sleep 5
-$imagemagick $filename -resize 25%  ./$samplesfolder/$filename
+$imagemagick $filename -resize 50%  ./$samplesfolder/$filename
 
 echo create tiles
 echo murray $imagemagick $basename-125.$extension -crop 256x256 -set filename:tile "%[fx:page.x/$tilesize]_%[fx:page.y/$tilesize]" +repage +adjoin "./$tilesfolder/$basename/125/%[filename:tile].$extension"

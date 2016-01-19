@@ -39,7 +39,13 @@ public class CalloutFactory {
         detailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent viewDetails = new Intent(activity, AreaDetailVideoViewActivity.class);
+                Class activityClass = null;
+                try {
+                    activityClass = Class.forName(area.getDetailActivityClass());
+                } catch (ClassNotFoundException ex){
+                    throw new IllegalArgumentException("Area does not have associated detail activity " + area);
+                }
+                Intent viewDetails = new Intent(activity, activityClass);
 
                 viewDetails.putExtra(AreasListActivity.AREA_KEY, area);
 

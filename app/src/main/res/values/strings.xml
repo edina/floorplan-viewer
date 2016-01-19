@@ -7,53 +7,63 @@
     <string-array name="titles">
         <item>Spatial Memories</item>
         <item>Building History</item>
+        <item>Placeholder</item>
+
     </string-array>
 
     <string-array name="beaconMappings">
         <item>34613</item>
         <item>65119</item>
-
+        <item>30295</item>
     </string-array>
 
-    <array name="route_list_icons" >
+    <array name="route_list_icons">
         <item>@drawable/welcome_to_the_main_library_crop</item>
         <item>@drawable/building_history_crop</item>
-
+        <item>@drawable/building_history_crop</item>
 
     </array>
 
-    <array name="video_list" >
+    <array name="video_list">
         <item>@raw/welcome_to_the_main_library</item>
         <item>@raw/building_history</item>
 
-
+        <item>@raw/building_history</item>
     </array>
-    <string-array name="locations" >
+    <string-array name="locations">
         <item>1650,2000</item>
         <item>1650,3000</item>
-
+        <item>1650,4000</item>
     </string-array>
 
-    <string-array name="bounding_areas" >
+    <string-array name="bounding_areas">
         <item>1400,1800;2000,1800;2000,2500;1400,2500;1400,1800;2000,1800</item>
         <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
-
+        <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
     </string-array>
 
     <string-array name="descriptions">
 
         <item>Largest library on campus</item>
         <item>1960s to the present day</item>
-
+        <item>description sdfadf dafg</item>
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
-    <array name="area_images" >
+    <array name="area_images">
         <item>@raw/welcome_to_the_main_library</item>
         <item>@raw/building_history</item>
-
-
+        <item>@raw/building_history</item>
     </array>
+
+
+    <string-array name="activityDetailClass">
+        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
+        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
+        <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
+
+    </string-array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
     <string name="title_floor_plan">Edina Floor plan</string>
+    <string name="title_activity_detail_card_view">Area Detail</string>
 </resources>

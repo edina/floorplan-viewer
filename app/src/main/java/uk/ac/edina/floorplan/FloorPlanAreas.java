@@ -28,10 +28,11 @@ public class FloorPlanAreas {
             TypedArray icons = resources.obtainTypedArray(R.array.route_list_icons);
 
             TypedArray videos = resources.obtainTypedArray(R.array.video_list);
+            String[] activityDetailClass = resources.getStringArray(R.array.activityDetailClass);
 
 
             for (int i = 0; i < titles.length; i++) {
-                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i],  videos.getResourceId(i, -1), bbox[i], beaconIdMappings[i] ));
+                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i],  videos.getResourceId(i, -1), bbox[i], beaconIdMappings[i],activityDetailClass[i] ));
             }
         }
 

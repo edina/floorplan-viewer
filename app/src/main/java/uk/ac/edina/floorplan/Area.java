@@ -18,7 +18,13 @@ public class Area implements Serializable{
     private String beaconId;
     private int videoId;
 
-    Area(String title, int imageId, String description, String locations, int videoId, String bbox, String beaconId) {
+    public String getDetailActivityClass() {
+        return detailActivityClass;
+    }
+
+    private String detailActivityClass;
+
+    Area(String title, int imageId, String description, String locations, int videoId, String bbox, String beaconId, String detailActivityClass ) {
         this.title = title;
         this.imageId = imageId;
         this.description = description;
@@ -29,6 +35,7 @@ public class Area implements Serializable{
         this.videoId = videoId;
         this.bboxPoints = parseBBox(bbox);
         this.beaconId = beaconId;
+        this.detailActivityClass = detailActivityClass;
     }
 
     public String getBeaconId() {

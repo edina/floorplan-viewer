@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
 
-        android:text="Main Library Tour"
+        android:text="EDINA Anniversary Open Day"
         android:textColor="@color/White"
         android:background="@color/UniRedBackGround"
         android:id="@+id/mainTitle"

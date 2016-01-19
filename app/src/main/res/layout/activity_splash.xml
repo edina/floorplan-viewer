@@ -31,7 +31,7 @@
                     android:textColor="@color/White"
                     android:gravity="center_horizontal" />
 
-                <TextView android:text="Open Day 2016" android:layout_width="match_parent" android:id="@+id/splashSubtitle"
+                <TextView android:text="20th Anniversary\n Open Day" android:layout_width="match_parent" android:id="@+id/splashSubtitle"
                     android:layout_height="wrap_content" android:textSize="32sp"
                     android:textColor="@color/White"
                     android:gravity="center_horizontal" />

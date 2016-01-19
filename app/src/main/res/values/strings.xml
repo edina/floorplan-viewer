@@ -1,96 +1,59 @@
 <resources>
     <string name="app_name">Library Tour</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
     <string name="inital_Time">0 min, 0 sec</string>
+
     <string-array name="titles">
-        <item>Welcome to the Main Library</item>
+        <item>Spatial Memories</item>
         <item>Building History</item>
-        <item>Exhibition Gallery</item>
-        <item>Help Desk and HUB</item>
-        <item>Ground Floor Study Area</item>
-        <item>Signature Room</item>
-        <item>Library Cafe and Beyond</item>
     </string-array>
 
     <string-array name="beaconMappings">
-        <item>60514</item>
-        <item>15877</item>
-        <item>58026</item>
-        <item>11097</item>
-        <item>36696</item>
-        <item>34740</item>
-        <item>27600</item>
+        <item>34613</item>
+        <item>65119</item>
+
     </string-array>
 
     <array name="route_list_icons" >
         <item>@drawable/welcome_to_the_main_library_crop</item>
         <item>@drawable/building_history_crop</item>
-        <item>@drawable/exhibition_gallery_crop</item>
-        <item>@drawable/helpdesk_and_hub_crop</item>
-        <item>@drawable/ground_floor_study_area_crop</item>
-        <item>@drawable/signature_room_crop</item>
-        <item>@drawable/library_cafe_and_beyond_crop</item>
+
 
     </array>
 
     <array name="video_list" >
         <item>@raw/welcome_to_the_main_library</item>
         <item>@raw/building_history</item>
-        <item>@raw/exhibition_gallery</item>
-        <item>@raw/help_desk_and_hub</item>
-        <item>@raw/ground_floor_study_area</item>
-        <item>@raw/signature_room</item>
-        <item>@raw/library_cafe_and_beyond</item>
+
 
     </array>
     <string-array name="locations" >
         <item>1650,2000</item>
         <item>1650,3000</item>
-        <item>500,2900</item>
-        <item>1700,1300</item>
-        <item>4500,500</item>
-        <item>4400,1750</item>
-        <item>2950,2850</item>
+
     </string-array>
 
     <string-array name="bounding_areas" >
         <item>1400,1800;2000,1800;2000,2500;1400,2500;1400,1800;2000,1800</item>
         <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
 
-        <item>320,2500;700,2500;700,3300;320,3300;320,2500;700,2500</item>
-        <item>1100,1000;2400,1000;2400,1700;1100,1700;1100,1000;2400,1000</item>
-
-        <item>3700,200;5200,200;5200,1000;3700,1000;3700,200;5200,200</item>
-        <item>4300,1500;4600,1500;4600,2100;4300,2100;4300,1500;4600,1500</item>
-
-        <item>2800,2800;3800,2800;3800,3400;2800,3400;2800,2800;3800,2800</item>
     </string-array>
 
     <string-array name="descriptions">
 
         <item>Largest library on campus</item>
         <item>1960s to the present day</item>
-        <item>Engage with our collections</item>
-        <item>Any question answered</item>
-        <item>Diverse study space</item>
-        <item>Study with the greats</item>
-        <item>Continue your tour</item>
+
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
     <array name="area_images" >
         <item>@raw/welcome_to_the_main_library</item>
         <item>@raw/building_history</item>
-        <item>@raw/exhibition_gallery</item>
-        <item>@raw/help_desk_and_hub</item>
-        <item>@raw/ground_floor_study_area</item>
-        <item>@raw/signature_room</item>
-        <item>@raw/library_cafe_and_beyond</item>
+
 
     </array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
-    <string name="title_floor_plan">Library Tour</string>
+    <string name="title_floor_plan">Edina Floor plan</string>
 </resources>

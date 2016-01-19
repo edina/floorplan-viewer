@@ -26,12 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:background="@drawable/round">
 
-                <TextView android:text="Main Library Tour" android:layout_width="match_parent" android:id="@+id/splashTitle"
+                <TextView android:text="Edina Floor Plan" android:layout_width="match_parent" android:id="@+id/splashTitle"
                     android:layout_height="wrap_content" android:textSize="32sp"
                     android:textColor="@color/White"
                     android:gravity="center_horizontal" />
 
-                <TextView android:text="Doors Open Day 2015" android:layout_width="match_parent" android:id="@+id/splashSubtitle"
+                <TextView android:text="Open Day 2016" android:layout_width="match_parent" android:id="@+id/splashSubtitle"
                     android:layout_height="wrap_content" android:textSize="32sp"
                     android:textColor="@color/White"
                     android:gravity="center_horizontal" />

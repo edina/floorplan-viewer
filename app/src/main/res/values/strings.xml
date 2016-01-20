@@ -5,64 +5,73 @@
     <string name="inital_Time">0 min, 0 sec</string>
 
     <string-array name="titles">
+        <item>Welcome to EDINA</item>
         <item>Spatial Memories</item>
         <item>Mobile Dev Area</item>
-        <item>Welcome to EDINA</item>
+
 
     </string-array>
 
     <string-array name="beaconMappings">
-        <item>34165</item>
-        <item>24125</item>
+        <item>65119</item>
+        <item>30295</item>
         <item>64404</item>
     </string-array>
 
     <array name="route_list_icons">
+        <item>@drawable/edinburgh_castle_icon</item>
         <item>@drawable/spatial_memories_icon</item>
         <item>@drawable/mobile_dev_icon</item>
-        <item>@drawable/edinburgh_castle_icon</item>
+
 
     </array>
 
     <array name="card_view_images">
-        <item>@drawable/edinburghh_castle</item>
-        <item>@drawable/edinburghh_castle</item>
-        <item>@drawable/edinburghh_castle</item>
+        <item>@drawable/edinburgh_castle</item>
+        <item>@drawable/mobile_dev</item>
+        <item>@drawable/edinburgh_castle</item>
 
     </array>
 
     <array name="video_list">
-        <item>@raw/spatial_memories</item>
+
         <item></item>
+        <item>@raw/spatial_memories</item>
         <item></item>
     </array>
     <string-array name="locations">
+        <item>1548,1458</item>
         <item>2211,1863</item>
         <item>3102,1544</item>
-        <item>1548,1458</item>
+
     </string-array>
 
     <string-array name="bounding_areas">
+        <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
         <item>1400,1800;2000,1800;2000,2500;1400,2500;1400,1800;2000,1800</item>
         <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
-        <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
+
     </string-array>
 
 
     
     <string-array name="descriptions">
-
+        <item>EDINA Admin area</item>
         <item>Videos from Spatial Memories project</item>
         <item>Mobile App Development</item>
-        <item>EDINA Admin area</item>
+
     </string-array>
 
     <string-array name="card_view_detail">
+        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
+        <item></item>
+        <item>In this area you can find out about some of the mobile app projects EDINA has been involved in.\n\n
+Colin is demonstrating the "Fix My Campus" - an app designed to assist students with disabilities to report issues on campus.\n\n
+Panos can show you work on the "COBWEB" citizen science project and talk you through the process of creating a data capture form. \n\n
+Ruben can show you the "Fieldtrip GB" app and authoring tool.\n\n
+Speak to Ben or Murray to hear about our experiments with iBeacons and learn more about this demo.</item>
 
-        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
-        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
-        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
-    </string-array>
+      </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
 

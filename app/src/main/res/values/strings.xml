@@ -6,7 +6,7 @@
 
     <string-array name="titles">
         <item>Spatial Memories</item>
-        <item>Building History</item>
+        <item>Placeholder</item>
         <item>Placeholder</item>
 
     </string-array>
@@ -25,10 +25,10 @@
     </array>
 
     <array name="video_list">
-        <item>@raw/welcome_to_the_main_library</item>
-        <item>@raw/building_history</item>
+        <item>@raw/spatial_memories</item>
+        <item></item>
 
-        <item>@raw/building_history</item>
+        <item></item>
     </array>
     <string-array name="locations">
         <item>1650,2000</item>
@@ -50,17 +50,11 @@
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
-    <array name="area_images">
-        <item>@raw/welcome_to_the_main_library</item>
-        <item>@raw/building_history</item>
-        <item>@raw/building_history</item>
-    </array>
-
 
     <string-array name="activityDetailClass">
         <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
         <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
-        <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
+        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
 
     </string-array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>

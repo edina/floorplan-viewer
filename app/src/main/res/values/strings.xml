@@ -18,7 +18,7 @@
     </string-array>
 
     <array name="route_list_icons">
-        <item>@drawable/welcome_to_the_main_library_crop</item>
+        <item>@drawable/spatial_memories_icon</item>
         <item>@drawable/building_history_crop</item>
         <item>@drawable/building_history_crop</item>
 
@@ -53,7 +53,7 @@
     <string-array name="activityDetailClass">
         <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
         <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
-        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
+        <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
 
     </string-array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>

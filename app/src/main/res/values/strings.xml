@@ -19,8 +19,8 @@
 
     <array name="route_list_icons">
         <item>@drawable/spatial_memories_icon</item>
+        <item>@drawable/mobile_dev_icon</item>
         <item>@drawable/edinburgh_castle_icon</item>
-        <item>@drawable/building_history_crop</item>
 
     </array>
 
@@ -68,7 +68,7 @@
 
     <string-array name="activityDetailClass">
         <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
-        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
+        <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
         <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
 
     </string-array>

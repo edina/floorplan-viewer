@@ -37,14 +37,11 @@ public class FloorPlanViewActivity extends FloorPlanBaseActivity {
         tileView = new TileView(this);
 
 
-        // Set the minimum parameters
-        int zoomF = 2;
 
+        tileView.setSize(3986 * Area.ZOOM_FACTOR, 2192 * Area.ZOOM_FACTOR);
+        tileView.addDetailLevel(1f / Area.ZOOM_FACTOR, "tiles/floorplan/1000/_%col%_%row%.png", "tiles/samples/floorplan.jpg");
 
-        tileView.setSize(3986 * zoomF, 2192 * zoomF);
-        tileView.addDetailLevel(1f / zoomF, "tiles/floorplan/1000/_%col%_%row%.png", "tiles/samples/floorplan.jpg");
-
-        tileView.addDetailLevel(0.5f / zoomF, "tiles/floorplan/500/_%col%_%row%.png", "tiles/samples/floorplan.jpg", 256, 256);
+        tileView.addDetailLevel(0.5f / Area.ZOOM_FACTOR, "tiles/floorplan/500/_%col%_%row%.png", "tiles/samples/floorplan.jpg", 256, 256);
 
         // bottom left of university 55.942584, -3.188343
         Utils.LatLon latLonM = utils.latLonToMeters(55.942584, -3.188343);

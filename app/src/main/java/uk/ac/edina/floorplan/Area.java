@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Area implements Serializable{
 
+    public static final int ZOOM_FACTOR = 2;
 
     List<double[]> bboxPoints;
     private String title;
@@ -35,8 +36,8 @@ public class Area implements Serializable{
         this.imageId = imageId;
         this.description = description;
         String[] p = locations.split(",");
-        int x = Integer.valueOf(p[0]);
-        int y = Integer.valueOf(p[1]);
+        int x = Integer.valueOf(p[0]) * ZOOM_FACTOR;
+        int y = Integer.valueOf(p[1]) * ZOOM_FACTOR;
         point = new ImagePixelLocation(x, y);
         this.videoId = videoId;
         this.bboxPoints = parseBBox(bbox);
@@ -91,7 +92,7 @@ public class Area implements Serializable{
 
            String[] coords =  coordinates.split(",");
 
-            bboxPoints.add(new double[]{ Double.valueOf(coords[0]), Double.valueOf(coords[1])});
+            bboxPoints.add(new double[]{ Double.valueOf(coords[0]) * ZOOM_FACTOR, Double.valueOf(coords[1]) * ZOOM_FACTOR});
 
         }
 

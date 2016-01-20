@@ -27,7 +27,6 @@
     <array name="video_list">
         <item>@raw/spatial_memories</item>
         <item></item>
-
         <item></item>
     </array>
     <string-array name="locations">

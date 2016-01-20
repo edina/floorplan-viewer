@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/cardViewImage"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -23,14 +23,14 @@
             android:text="KNOW MORE" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/cardViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/cardViewDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

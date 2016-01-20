@@ -19,8 +19,15 @@
 
     <array name="route_list_icons">
         <item>@drawable/spatial_memories_icon</item>
+        <item>@drawable/edinburgh_castle_icon</item>
         <item>@drawable/building_history_crop</item>
-        <item>@drawable/building_history_crop</item>
+
+    </array>
+
+    <array name="card_view_images">
+        <item>@drawable/edinburghh_castle</item>
+        <item>@drawable/edinburghh_castle</item>
+        <item>@drawable/edinburghh_castle</item>
 
     </array>
 
@@ -48,6 +55,13 @@
         <item>Videos from Spatial Memories project</item>
         <item>Mobile App Development</item>
         <item>EDINA Admin area</item>
+    </string-array>
+
+    <string-array name="card_view_detail">
+
+        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
+        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
+        <item>Remember to share your best photos, whether of the lovely view or our Open House activities, with the hashtag #EDINA20 to be in with the chance to win a mystery prize!</item>
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 

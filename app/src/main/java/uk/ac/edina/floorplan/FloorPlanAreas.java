@@ -26,13 +26,16 @@ public class FloorPlanAreas {
 
             String[] locations = resources.getStringArray(R.array.locations);
             TypedArray icons = resources.obtainTypedArray(R.array.route_list_icons);
+            TypedArray images = resources.obtainTypedArray(R.array.card_view_images);
 
             TypedArray videos = resources.obtainTypedArray(R.array.video_list);
             String[] activityDetailClass = resources.getStringArray(R.array.activityDetailClass);
 
-
+            String[] cardViewDetail = resources.getStringArray(R.array.card_view_detail);
             for (int i = 0; i < titles.length; i++) {
-                areas.add(new Area(titles[i], icons.getResourceId(i, -1), descriptions[i], locations[i],  videos.getResourceId(i, -1), bbox[i], beaconIdMappings[i],activityDetailClass[i] ));
+                areas.add(new Area(titles[i], icons.getResourceId(i, -1),
+                        descriptions[i], locations[i],  videos.getResourceId(i, -1), bbox[i], beaconIdMappings[i],activityDetailClass[i],
+                        images.getResourceId(i, -1), cardViewDetail[i]));
             }
         }
 

@@ -2,6 +2,7 @@ package uk.ac.edina.floorplan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DetailCardViewActivity extends FloorPlanBaseActivity {
@@ -15,8 +16,14 @@ public class DetailCardViewActivity extends FloorPlanBaseActivity {
 
         Area area = (Area)previousIntent.getSerializableExtra(AreasListActivity.AREA_KEY);
 
-        TextView areaDetailsTitle = (TextView) findViewById(R.id.areaDetailVideoTitle);
-        areaDetailsTitle.setText(area.getTitle());
+        ImageView cardViewImage = (ImageView) findViewById(R.id.cardViewImage);
+        cardViewImage.setImageResource(area.getCardViewImageId());
+        TextView cardViewTitle = (TextView) findViewById(R.id.cardViewTitle);
+        cardViewTitle.setText(area.getTitle());
+        TextView cardViewDetail = (TextView) findViewById(R.id.cardViewDetails);
+        cardViewDetail.setText(area.getCardViewDetail());
+
+
     }
 
     @Override

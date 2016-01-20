@@ -17,6 +17,11 @@ public class Area implements Serializable{
     private ImagePixelLocation point;
     private String beaconId;
     private int videoId;
+    private String cardViewDetail;
+
+
+
+    private int cardViewImageId;
 
     public String getDetailActivityClass() {
         return detailActivityClass;
@@ -24,7 +29,8 @@ public class Area implements Serializable{
 
     private String detailActivityClass;
 
-    Area(String title, int imageId, String description, String locations, int videoId, String bbox, String beaconId, String detailActivityClass ) {
+    Area(String title, int imageId, String description, String locations, int videoId, String bbox,
+         String beaconId, String detailActivityClass, int cardViewImageId, String cardViewDetail ) {
         this.title = title;
         this.imageId = imageId;
         this.description = description;
@@ -36,6 +42,8 @@ public class Area implements Serializable{
         this.bboxPoints = parseBBox(bbox);
         this.beaconId = beaconId;
         this.detailActivityClass = detailActivityClass;
+        this.cardViewImageId = cardViewImageId;
+        this.cardViewDetail = cardViewDetail;
     }
 
     public String getBeaconId() {
@@ -64,6 +72,15 @@ public class Area implements Serializable{
 
     public ImagePixelLocation getPoint() {
         return point;
+    }
+
+
+    public int getCardViewImageId() {
+        return cardViewImageId;
+    }
+
+    public String getCardViewDetail() {
+        return cardViewDetail;
     }
 
     private List<double[]>  parseBBox(String bbox){

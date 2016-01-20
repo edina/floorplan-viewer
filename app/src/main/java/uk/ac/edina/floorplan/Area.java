@@ -66,7 +66,7 @@ public class Area implements Serializable{
         return point;
     }
 
-private List<double[]>  parseBBox(String bbox){
+    private List<double[]>  parseBBox(String bbox){
         ArrayList<double[]> bboxPoints = new ArrayList<>();
 
         String[] points = bbox.split(";");

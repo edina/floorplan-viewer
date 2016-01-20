@@ -8,7 +8,7 @@
         <item>Welcome to EDINA</item>
         <item>Spatial Memories</item>
         <item>Mobile Dev Area</item>
-
+        <item>Meeting Room Suites</item>
 
     </string-array>
 
@@ -16,13 +16,14 @@
         <item>65119</item>
         <item>30295</item>
         <item>64404</item>
+        <item>34613</item>
     </string-array>
 
     <array name="route_list_icons">
         <item>@drawable/edinburgh_castle_icon</item>
         <item>@drawable/spatial_memories_icon</item>
         <item>@drawable/mobile_dev_icon</item>
-
+        <item>@drawable/meeting_rooms_icon</item>
 
     </array>
 
@@ -30,7 +31,7 @@
         <item>@drawable/edinburgh_castle</item>
         <item>@drawable/mobile_dev</item>
         <item>@drawable/edinburgh_castle</item>
-
+        <item>@drawable/meeting_rooms</item>
     </array>
 
     <array name="video_list">
@@ -38,19 +39,20 @@
         <item></item>
         <item>@raw/spatial_memories</item>
         <item></item>
+        <item></item>
     </array>
     <string-array name="locations">
         <item>1548,1458</item>
         <item>2211,1863</item>
         <item>3102,1544</item>
-
+        <item>3102,1544</item>
     </string-array>
 
     <string-array name="bounding_areas">
         <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
         <item>1400,1800;2000,1800;2000,2500;1400,2500;1400,1800;2000,1800</item>
         <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
-
+        <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
     </string-array>
 
 
@@ -59,7 +61,7 @@
         <item>EDINA Admin area</item>
         <item>Videos from Spatial Memories project</item>
         <item>Mobile App Development</item>
-
+        <item>Meeting Rooms and Kitchen area</item>
     </string-array>
 
     <string-array name="card_view_detail">
@@ -70,8 +72,15 @@ Colin is demonstrating the "Fix My Campus" - an app designed to assist students 
 Panos can show you work on the "COBWEB" citizen science project and talk you through the process of creating a data capture form. \n\n
 Ruben can show you the "Fieldtrip GB" app and authoring tool.\n\n
 Speak to Ben or Murray to hear about our experiments with iBeacons and learn more about this demo.</item>
+                <item>Camusdarach: Explore Scottish History through Tobar an Dualchais and The Statistical Accounts of Scotland.\n\n
+                    Accompaniment will be provided by Ellie Johnstone on clarsach in \'our room with a view\'.\n\n
 
-      </string-array>
+Luskentyre Room: is our pop-up cinema where you can enjoy the diverse film collections of MediaHub and EDINA with a tub of popcorn.\n\n
+
+Kitchen: free food and drinks!\n\n</item>
+
+
+    </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
 
@@ -79,7 +88,7 @@ Speak to Ben or Murray to hear about our experiments with iBeacons and learn mor
         <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
         <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
         <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
-
+        <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
     </string-array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
     <string name="title_floor_plan">Welcome to EDINA</string>

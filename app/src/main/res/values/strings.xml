@@ -6,15 +6,15 @@
 
     <string-array name="titles">
         <item>Spatial Memories</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
+        <item>Mobile Dev Area</item>
+        <item>Welcome to EDINA</item>
 
     </string-array>
 
     <string-array name="beaconMappings">
-        <item>34613</item>
-        <item>65119</item>
-        <item>30295</item>
+        <item>34165</item>
+        <item>24125</item>
+        <item>64404</item>
     </string-array>
 
     <array name="route_list_icons">
@@ -30,9 +30,9 @@
         <item></item>
     </array>
     <string-array name="locations">
-        <item>1650,2000</item>
-        <item>1650,3000</item>
-        <item>1650,4000</item>
+        <item>2211,1863</item>
+        <item>3102,1544</item>
+        <item>1548,1458</item>
     </string-array>
 
     <string-array name="bounding_areas">
@@ -41,11 +41,13 @@
         <item>1400,2800;2000,2800;2000,3500;1400,3500;1400,2800;2000,2800</item>
     </string-array>
 
+
+    
     <string-array name="descriptions">
 
-        <item>Largest library on campus</item>
-        <item>1960s to the present day</item>
-        <item>description sdfadf dafg</item>
+        <item>Videos from Spatial Memories project</item>
+        <item>Mobile App Development</item>
+        <item>EDINA Admin area</item>
     </string-array>
     <string name="title_activity_area_detail_view">AreaDetailView</string>
 
@@ -57,6 +59,6 @@
 
     </string-array>
     <string name="title_activity_area_detail_video_view">AreaDetailVideoView</string>
-    <string name="title_floor_plan">Edina Floor plan</string>
+    <string name="title_floor_plan">Welcome to EDINA</string>
     <string name="title_activity_detail_card_view">Area Detail</string>
 </resources>

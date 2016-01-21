@@ -29,8 +29,8 @@
 
     <array name="card_view_images">
         <item>@drawable/edinburgh_castle</item>
+        <item>@drawable/spatial_memories_icon</item>
         <item>@drawable/mobile_dev</item>
-        <item>@drawable/edinburgh_castle</item>
         <item>@drawable/meeting_rooms</item>
     </array>
 
@@ -85,8 +85,9 @@ Kitchen: free food and drinks!\n\n</item>
 
 
     <string-array name="activityDetailClass">
-        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
+
         <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
+        <item>uk.ac.edina.floorplan.AreaDetailVideoViewActivity</item>
         <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
         <item>uk.ac.edina.floorplan.DetailCardViewActivity</item>
     </string-array>

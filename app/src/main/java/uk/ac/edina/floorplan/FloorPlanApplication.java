@@ -52,6 +52,7 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
         beaconManager = BeaconManager.getInstanceForApplication(this);
         BeaconParser beaconParser = new BeaconParser();
         beaconParser.setBeaconLayout(BEACON_LAYOUT_FOR_ESTIMOTE);
+       // BeaconManager.setAndroidLScanningDisabled(true);
         beaconManager.getBeaconParsers().add(beaconParser);
         beaconManager.bind(this);
 
@@ -71,7 +72,8 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
                 for(Beacon beacon : beacons)
                 {
                     IBeacon bWrapper = new BeaconWrapper(beacon);
-                    Log.d("Ranging1", "didRangeBeaconsInRegion includes beacon:" + bWrapper.getMinorId()) ;
+                    Log.d("Ranging1", "didRangeBeaconsInRegion includes beacon:" + bWrapper.getMinorId() + " Distance " + bWrapper.getDistance() +
+                            " Signal Strength " + bWrapper.getRssi() + " Tx Power " + bWrapper.getTxPower() + " period;" + BeaconManager.DEFAULT_FOREGROUND_SCAN_PERIOD );
                 }
                 List<Beacon> sortedBeaconsByDistance = new ArrayList<>(beacons);
 
@@ -117,7 +119,7 @@ public class FloorPlanApplication extends Application implements BeaconConsumer 
                     boolean coloredBeaconsDebug = false;
 
 
-
+                    //  all beacon BeaconGeofence instances evaluate the nearest beacon
                     for (final BeaconGeoFence geoFence : beaconGeoFences) {
                         // check geofences to see if nearest beacon is less than radius and trigger enter event
                             geoFence.evaluateGeofence(bWrapper);

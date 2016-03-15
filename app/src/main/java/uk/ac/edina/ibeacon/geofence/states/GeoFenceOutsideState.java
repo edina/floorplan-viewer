@@ -56,4 +56,5 @@ public class GeoFenceOutsideState implements BeaconGeoFenceState {
         }
 
     }
+
 }

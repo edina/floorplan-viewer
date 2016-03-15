@@ -43,6 +43,7 @@ public class BeaconGeoFence extends BroadcastReceiver {
         beaconIntentFilter.addAction("STAY_OUTSIDE");
         beaconIntentFilter.addAction("STAY_INSIDE");
         beaconIntentFilter.addAction("RESET");
+        beaconIntentFilter.addAction("EXIT");
         LocalBroadcastManager.getInstance(appContext).registerReceiver(this, beaconIntentFilter);
 
     }
@@ -123,19 +124,32 @@ public class BeaconGeoFence extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         String action = intent.getAction() ;
+        if("EXIT".equals(action)) {
+
+            String beaconId = intent.getStringExtra("BEACON_ID") ;
+            double exitDistance = intent.getDoubleExtra("DISTANCE", -1) ;
+
+
+            if( ! this.getMinorId().equals(beaconId) )
+            {
+                Log.d("Ranging1", "BeaconGeoFence " + this.getMinorId() +
+                        " received EXIT intent from beacon " + beaconId +
+                        " at exit distance:" + exitDistance);
+
+
+            }
+        }
         if("ENTER".equals(action))
         {
 
             String beaconId = intent.getStringExtra("BEACON_ID") ;
             double enterDistance = intent.getDoubleExtra("DISTANCE", -1) ;
 
-
-
+            // the nearest beacon in the last batch of beacon readings was nearer than previous INSIDE beacon
+            // so broadcast an enter event. All other beacons set to the enter distance. the new threshold to beat.
 
             if( ! this.getMinorId().equals(beaconId) )
             {
-
-
                 Log.d("Ranging1", "BeaconGeoFence " + this.getMinorId() +
                         " received ENTER intent from beacon " + beaconId +
                         " at enter distance:" + enterDistance) ;
@@ -150,14 +164,21 @@ public class BeaconGeoFence extends BroadcastReceiver {
             Log.d("Ranging1", "BeaconGeoFence " + this.getMinorId() +
                     " received STAY_OUTSIDE intent from beacon " + beaconId ) ;
 
+            // increase entry radius as the closet beacon in last abtch of readings was not near enough to trigger an entry
+            // increasing the entry radius makes it easier next time for this or another outside beacon to push out the current INside bacon
 
-            if(this.radius < (FloorPlanApplication.MAX_BEACON_RANGE - (FloorPlanApplication.MAX_BEACON_RANGE*0.6)) ){
-                this.radius = this.radius + (FloorPlanApplication.MAX_BEACON_RANGE*0.6);
+            if(this.radius < (FloorPlanApplication.MAX_BEACON_RANGE - (FloorPlanApplication.MAX_BEACON_RANGE* 0.1 )) ){
+                // increase radius by a tenth of max range
+                this.radius = this.radius + (FloorPlanApplication.MAX_BEACON_RANGE*0.1);
             }
-            else if(this.radius < FloorPlanApplication.MAX_BEACON_RANGE)
-            {
-                this.radius = FloorPlanApplication.MAX_BEACON_RANGE ;
-            }
+
+
+            Log.d("Ranging1", "BeaconGeoFence " + this.getMinorId() +
+                    "STAY_OUTSIDE intent changed radius to " + this.radius ) ;
+
+        // the current INSIDE geofence was the closest in the batch
+        // all other beacons change their radius to the latest reading from the INSIDE beacon
+        // the INSIDE beacon still keeps its orginal ENTER distance radius
         }else if("STAY_INSIDE".equals(action)) {
             String beaconId = intent.getStringExtra("BEACON_ID");
             double insideDistance = intent.getDoubleExtra("DISTANCE", -1) ;
@@ -165,13 +186,15 @@ public class BeaconGeoFence extends BroadcastReceiver {
                     " received STAY_INSIDE intent from beacon " + beaconId + " with inside distance:" + insideDistance);
 
             if(! this.getMinorId().equals(beaconId) ) {
+                // TODO only if insideDistnace < this.radius?
                 this.radius = insideDistance;
             }
         }else if("RESET".equals(action)) {
 
             Log.d("Ranging1", "BeaconGeoFence " + this.getMinorId() +
-                    " received RESET intent" ) ;
+                    " received RESET intent current raduius  " + getRadius())  ;
 
+            this.radius = FloorPlanApplication.MAX_BEACON_RANGE ;
             this.currentState = this.getOutsideGeoFence() ;
         }
 

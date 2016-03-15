@@ -34,10 +34,15 @@ public class GeoFenceInsideState implements  BeaconGeoFenceState {
         if(leavingGeofence) {
             beaconGeoFence.setCurrentState(beaconGeoFence.getOutsideGeoFence());
             beaconGeoFence.getGeoFenceAction().onLeave();
+            Intent beaconGeofenceExitIntent = new Intent() ;
+            beaconGeofenceExitIntent.setAction("EXIT") ;
+            beaconGeofenceExitIntent.putExtra("BEACON_ID",beaconGeoFence.getMinorId()) ;
+            beaconGeofenceExitIntent.putExtra("DISTANCE",distance) ;
+            LocalBroadcastManager.getInstance(beaconGeoFence.getAppContext()).sendBroadcast(beaconGeofenceExitIntent) ;
         }
         else
         {
-            // TODO deal with splash screen timeout issue
+
             //staying inside - braodcast latest inside distance all geofences
             Intent beaconGeofenceNoStateChangeIntent = new Intent() ;
             beaconGeofenceNoStateChangeIntent.setAction("STAY_INSIDE") ;
